@@ -1,0 +1,126 @@
+\documentclass[11pt, fleqn]{article}
+\usepackage{multicol}
+
+%\usepackage[a4, frame, center, noinfo]{crop}
+
+\include{template}
+\usepackage{mathtools, nccmath}
+\usepackage{tikz}
+\usepackage{mathtools}
+\usepackage{graphicx}
+\usepackage{tikz} % To generate the plot from csv
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.5}
+\usetikzlibrary{patterns}
+\usepackage{amssymb}% http://ctan.org/pkg/amssymb
+\usepackage{pifont}% http://ctan.org/pkg/pifont
+\usepackage{graphicx}
+
+\usepackage{pgf}
+\usepackage{pgfpages}
+\usepackage{booktabs}
+
+
+
+\begin{document}
+
+\renewcommand\refname{}
+
+
+
+
+\begin{center}
+
+			\vspace{-1cm}
+		   \includegraphics[scale=0.5]{Sharif}%\hfill \\[1em]  
+		   \vspace{2cm}
+
+\textbf{
+\Huge{
+استفاده از روش‌های مولتی مدال برای تشخیص احساس
+}}
+\vspace{3cm}
+
+\textbf{
+\huge{
+پردازش زبان‌ها طبیعی
+}}
+
+\vspace{10mm}
+
+
+\Large{
+ساحل مس فروش
+سروش تابش
+درنا دهقانی
+امین کشیری
+فاطمه توحیدیان
+سید علیرضا موسوی زاده
+}
+
+\vspace{4cm}
+
+\large{
+بهار ۱۴۰۱
+}
+\end{center}
+
+
+\newpage
+\section*{چکیده}
+
+
+
+\newhline
+
+\input{parts/summary.tex}
+ 
+\newhline
+
+
+
+\begin{multicols}{2}
+
+\section{مقدمه}
+
+
+\input{parts/intro.tex}
+
+
+\section{داده ها}
+
+
+\input{parts/data.tex}
+
+% \end{multicols}
+
+
+% \begin{multicols}{2}
+
+\section{مدل‌}
+
+
+\input{parts/model.tex}
+
+\section{نتایج}
+
+\input{parts/results.tex}
+
+
+\section{نتیجه‌گیری}
+\input{parts/concolusion.tex}
+
+
+\end{multicols}
+
+
+\section{منابع}
+
+
+
+\newhline
+
+
+\input{parts/refrences.tex}
+
+\end{document}
