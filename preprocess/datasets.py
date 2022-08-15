@@ -47,7 +47,7 @@ class FaceLandmarksDataset(Dataset):
             img_paths = img_paths[:self.image_pad] # only keeping images within the pad. should change to better selection
             images = list()
             for img_id in img_paths:
-                img_name = os.path.join(self.root_dir,
+                img_name = os.path.join(self.image_dir,
                                     f"{img_id}.jpg")
                 image = cv2.imread(img_name)
                 images.append(image)
@@ -60,6 +60,12 @@ class FaceLandmarksDataset(Dataset):
             for pad in range(0, padding):
                 images.append(np.zeros((256, 256, 3)))
             return images
+    
+    def get_single_img_feature(self, idx):
+        img_name = os.path.join(self.image_dir,
+                                    f"{idx}.jpg")
+        image = cv2.imread(img_name)
+        return image
 
     def get_sentiment(self, sentiment):
         return sentiment
@@ -72,8 +78,8 @@ class FaceLandmarksDataset(Dataset):
         if torch.is_tensor(idx):
             idx = idx.tolist()
         data = self.data_info.iloc[idx]
-        img_paths = data["images"]
-        images = self.get_image_features(img_paths)
+        # img_paths = data["images"] # img indices seem wrong
+        images = self.get_single_img_feature(idx)
         sentiment = self.get_sentiment(data["sentiment"])
         text_embed = self.get_text_features(data["text"])
         sample = {'images': images,
