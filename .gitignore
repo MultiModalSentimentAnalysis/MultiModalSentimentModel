@@ -130,3 +130,15 @@ dmypy.json
 
 # data and info
 data/
+
+
+
+# Model weights
+*.pt
+
+
+# LaTeX extra files
+*.aux
+*.synctex.gz
+# Development LaTeX PDF file
+LaTeX/Main.pdf 
