@@ -128,8 +128,8 @@ dmypy.json
 .pyre/
 
 
-# data and info
-data/
+# data images
+data/images/*/*
 
 
 

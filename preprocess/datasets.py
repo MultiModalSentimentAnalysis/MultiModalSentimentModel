@@ -1,30 +1,24 @@
-import os
+import os, cv2, torch, ast
 import pandas as pd
 import numpy as np
-import cv2
-import torch
-from torch.utils.data import Dataset, DataLoader
-import ast
+from pathlib import Path
+from torch.utils.data import Dataset
 
 
-class FaceLandmarksDataset(Dataset):
-    """Face Landmarks dataset."""
+class MSCTDDataSet(Dataset):
+    """MSCTD dataset."""
 
-    def __init__(self, base_path, dataset_type, tokenizer=None):
+    def __init__(self, base_path="data/", dataset_type="train"):
         """
         Args:
-            csv_file (string): Path to the csv file with annotations.
-            root_dir (string): Directory with all the images.
-            transform (callable, optional): Optional transform to be applied
-                on a sample.
+            base_path (str): path to data folder
+            dataset_type (str): dev, train, test
         """
-        self.tokenizer = tokenizer
-        self.text_path = os.path.join(base_path, f"english_{dataset_type}.txt")
-        self.image_index_path = os.path.join(
-            base_path, f"image_index_{dataset_type}.txt"
-        )
-        self.sentiment_path = os.path.join(base_path, f"sentiment_{dataset_type}.txt")
-        self.image_dir = os.path.join(base_path, dataset_type)
+        base_path = Path(base_path)
+        self.text_path = base_path / f"english_{dataset_type}.txt"
+        self.image_index_path = base_path / f"image_index_{dataset_type}.txt"
+        self.sentiment_path = base_path / f"sentiment_{dataset_type}.txt"
+        self.image_dir = base_path / "images" / dataset_type
         self.data_info = self.read_info()
         self.image_pad = 10
 
@@ -37,7 +31,7 @@ class FaceLandmarksDataset(Dataset):
         with open(self.sentiment_path) as f:
             sentiments = [int(t.strip()) for t in f.readlines()]
         df = pd.DataFrame(
-            [texts, images, sentiments], index=["text", "images", "sentiment"]
+            [texts, images, sentiments], index=["text", "image", "sentiment"]
         ).transpose()
         return df
 
@@ -64,16 +58,17 @@ class FaceLandmarksDataset(Dataset):
             return images
 
     def get_single_img_feature(self, idx):
-        img_name = os.path.join(self.image_dir, f"{idx}.jpg")
-        image = cv2.imread(img_name)
+        img_name = self.image_dir / f"{idx}.jpg"
+        # image = np.load(img_name)
+        image = cv2.imread(str(img_name))
+        image.resize((495, 1024, 3))
         return image
 
     def get_sentiment(self, sentiment):
         return sentiment
 
     def get_text_features(self, text):
-        if self.tokenizer:
-            return self.tokenizer.encode(text)
+        return text
 
     def __getitem__(self, idx):
         if torch.is_tensor(idx):
@@ -86,3 +81,8 @@ class FaceLandmarksDataset(Dataset):
         sample = {"images": images, "text": text_embed, "sentiment": sentiment}
 
         return sample
+
+
+if __name__ == "__main__":
+    dataset = MSCTDDataSet("data/", "val")
+    print(dataset[0])

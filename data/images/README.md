@@ -1,0 +1,1 @@
+create three folders named train, val and test in this folder, and move the related images to this folders
