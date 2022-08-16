@@ -7,7 +7,9 @@ import pickle
 
 
 class EmotionRepresentationExtractor:
-    def __init__(self, ):
+    def __init__(
+        self,
+    ):
         self.face_detection_model: FaceDetection = None
         self.face_alignment_model: FaceAlignment = None
         self.face_normalizer_model: FaceNormalizer = None
@@ -36,18 +38,43 @@ class EmotionRepresentationExtractor:
         return self
 
     def extract_representation(self, input_image):
-        faces, detected_faces_information = self.face_detection_model.extract_faces(input_image, return_detections_information=True)
-        rotation_angles, rotation_directions = self.face_alignment_model.compute_alignment_rotation_(self.face_detection_model.get_eyes_coordinates())
-        rotated_faces = self.face_alignment_model.apply_rotation_on_images(faces, rotation_angles)
-        normalized_rotated_faces = self.face_normalizer_model.normalize_faces_image(rotated_faces)
+        faces, detected_faces_information = self.face_detection_model.extract_faces(
+            input_image, return_detections_information=True
+        )
+        (
+            rotation_angles,
+            rotation_directions,
+        ) = self.face_alignment_model.compute_alignment_rotation_(
+            self.face_detection_model.get_eyes_coordinates()
+        )
+        rotated_faces = self.face_alignment_model.apply_rotation_on_images(
+            faces, rotation_angles
+        )
+        normalized_rotated_faces = self.face_normalizer_model.normalize_faces_image(
+            rotated_faces
+        )
 
-        normalized_rotated_faces_255 = [(image * 255).astype(np.uint8) for image in normalized_rotated_faces]
+        normalized_rotated_faces_255 = [
+            (image * 255).astype(np.uint8) for image in normalized_rotated_faces
+        ]
 
-        representations = self.face_emotion_recognition_model.extract_representations_from_faces(normalized_rotated_faces_255)
-        predictions, scores = self.face_emotion_recognition_model.predict_emotions_from_representations(representations)
+        representations = (
+            self.face_emotion_recognition_model.extract_representations_from_faces(
+                normalized_rotated_faces_255
+            )
+        )
+        (
+            predictions,
+            scores,
+        ) = self.face_emotion_recognition_model.predict_emotions_from_representations(
+            representations
+        )
 
         self.faces = faces
-        self.rotation_angles, self.rotation_directions = rotation_angles, rotation_directions
+        self.rotation_angles, self.rotation_directions = (
+            rotation_angles,
+            rotation_directions,
+        )
         self.rotated_faces = rotated_faces
         self.normalized_rotated_faces = normalized_rotated_faces_255
 
@@ -74,11 +101,13 @@ class EmotionRepresentationExtractor:
 
     def store_embeddings(self, file, embeddings):
         with open(file, "wb") as file_out:
-            pickle.dump({'embeddings': embeddings}, file_out, protocol=pickle.HIGHEST_PROTOCOL)
+            pickle.dump(
+                {"embeddings": embeddings}, file_out, protocol=pickle.HIGHEST_PROTOCOL
+            )
 
     def load_embeddings(self, file):
         with open(file, "rb") as file_in:
             stored_data = pickle.load(file_in)
-            stored_embeddings = stored_data['embeddings']
+            stored_embeddings = stored_data["embeddings"]
 
         return stored_embeddings

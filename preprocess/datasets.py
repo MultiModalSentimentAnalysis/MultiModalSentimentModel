@@ -2,9 +2,10 @@ import os
 import pandas as pd
 import numpy as np
 import cv2
-import torch 
+import torch
 from torch.utils.data import Dataset, DataLoader
 import ast
+
 
 class FaceLandmarksDataset(Dataset):
     """Face Landmarks dataset."""
@@ -19,13 +20,14 @@ class FaceLandmarksDataset(Dataset):
         """
         self.tokenizer = tokenizer
         self.text_path = os.path.join(base_path, f"english_{dataset_type}.txt")
-        self.image_index_path = os.path.join(base_path, f"image_index_{dataset_type}.txt")
+        self.image_index_path = os.path.join(
+            base_path, f"image_index_{dataset_type}.txt"
+        )
         self.sentiment_path = os.path.join(base_path, f"sentiment_{dataset_type}.txt")
         self.image_dir = os.path.join(base_path, dataset_type)
         self.data_info = self.read_info()
         self.image_pad = 10
 
-    
     def read_info(self):
         with open(self.text_path) as f:
             texts = [t.strip() for t in f.readlines()]
@@ -34,21 +36,21 @@ class FaceLandmarksDataset(Dataset):
 
         with open(self.sentiment_path) as f:
             sentiments = [int(t.strip()) for t in f.readlines()]
-        df = pd.DataFrame([texts, images, sentiments], index=["text", "images", "sentiment"]).transpose()
+        df = pd.DataFrame(
+            [texts, images, sentiments], index=["text", "images", "sentiment"]
+        ).transpose()
         return df
-
 
     def __len__(self):
         return self.data_info.shape[0]
-    
 
     def get_image_features(self, image_indicies):
-        if image_indicies: # do the work if image indices is not none!
-            img_paths = img_paths[:self.image_pad] # only keeping images within the pad. should change to better selection
+        if image_indicies:  # do the work if image indices is not none!
+            # only keeping images within the pad. should change to better selection
+            img_paths = img_paths[: self.image_pad]
             images = list()
             for img_id in img_paths:
-                img_name = os.path.join(self.image_dir,
-                                    f"{img_id}.jpg")
+                img_name = os.path.join(self.image_dir, f"{img_id}.jpg")
                 image = cv2.imread(img_name)
                 images.append(image)
             padding = self.image_pad - len(images)
@@ -60,10 +62,9 @@ class FaceLandmarksDataset(Dataset):
             for pad in range(0, padding):
                 images.append(np.zeros((256, 256, 3)))
             return images
-    
+
     def get_single_img_feature(self, idx):
-        img_name = os.path.join(self.image_dir,
-                                    f"{idx}.jpg")
+        img_name = os.path.join(self.image_dir, f"{idx}.jpg")
         image = cv2.imread(img_name)
         return image
 
@@ -72,7 +73,7 @@ class FaceLandmarksDataset(Dataset):
 
     def get_text_features(self, text):
         if self.tokenizer:
-            return self.tokenizer.encode(text)    
+            return self.tokenizer.encode(text)
 
     def __getitem__(self, idx):
         if torch.is_tensor(idx):
@@ -82,8 +83,6 @@ class FaceLandmarksDataset(Dataset):
         images = self.get_single_img_feature(idx)
         sentiment = self.get_sentiment(data["sentiment"])
         text_embed = self.get_text_features(data["text"])
-        sample = {'images': images,
-                  "text": text_embed,
-                  "sentiment": sentiment}
+        sample = {"images": images, "text": text_embed, "sentiment": sentiment}
 
         return sample

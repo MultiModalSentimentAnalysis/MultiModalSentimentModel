@@ -10,7 +10,10 @@ class SimpleDenseNetwork(nn.Module):
         self.embedding_dimension = embedding_dimension
 
         self.fc = nn.Sequential(
-            nn.Linear(in_features=self.embedding_dimension, out_features=512, ),
+            nn.Linear(
+                in_features=self.embedding_dimension,
+                out_features=512,
+            ),
             nn.ReLU(inplace=True),
             nn.Linear(in_features=512, out_features=128),
             nn.ReLU(inplace=True),

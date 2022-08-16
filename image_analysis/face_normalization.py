@@ -5,7 +5,6 @@ import cv2
 
 
 class FaceNormalizer:
-
     def __init__(self):
         self.mp_face_mesh = mediapipe.solutions.face_mesh
         face_mesh = self.mp_face_mesh.FaceMesh(static_image_mode=True)
@@ -15,7 +14,9 @@ class FaceNormalizer:
         self.routes_idx = self.initialize__()
 
     def initialize__(self):
-        df = pd.DataFrame(list(self.mp_face_mesh.FACEMESH_FACE_OVAL), columns=["p1", "p2"])
+        df = pd.DataFrame(
+            list(self.mp_face_mesh.FACEMESH_FACE_OVAL), columns=["p1", "p2"]
+        )
         routes_idx = []
 
         p1 = df.iloc[0]["p1"]
@@ -46,8 +47,14 @@ class FaceNormalizer:
             source = landmarks.landmark[source_idx]
             target = landmarks.landmark[target_idx]
 
-            relative_source = (int(input_image.shape[1] * source.x), int(input_image.shape[0] * source.y))
-            relative_target = (int(input_image.shape[1] * target.x), int(input_image.shape[0] * target.y))
+            relative_source = (
+                int(input_image.shape[1] * source.x),
+                int(input_image.shape[0] * source.y),
+            )
+            relative_target = (
+                int(input_image.shape[1] * target.x),
+                int(input_image.shape[0] * target.y),
+            )
 
             # cv2.line(img, relative_source, relative_target, (255, 255, 255), thickness = 2)
 
@@ -67,5 +74,10 @@ class FaceNormalizer:
         return out
 
     def normalize_faces_image(self, input_images):
-        normalized_faces_images = [self.normalize_with_landmark_points__(input_image, self.get_landmarks__(input_image)) for input_image in input_images]
+        normalized_faces_images = [
+            self.normalize_with_landmark_points__(
+                input_image, self.get_landmarks__(input_image)
+            )
+            for input_image in input_images
+        ]
         return normalized_faces_images
