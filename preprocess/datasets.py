@@ -62,8 +62,10 @@ class MSCTDDataSet(Dataset):
             return images
 
     def get_single_img_feature(self, idx):
-        img_name = os.path.join(self.image_dir, f"{idx}.jpg")
-        image = cv2.imread(img_name)
+        img_name = self.image_dir / f"{idx}.jpg"
+        # image = np.load(img_name)
+        image = cv2.imread(str(img_name))
+        image.resize((495, 1024, 3))
         return image
 
     def get_sentiment(self, sentiment):
@@ -86,6 +88,13 @@ class MSCTDDataSet(Dataset):
 
         return sample
 
-ds = MSCTDDataSet('data/', 'val')
+if __name__ == "__main__":
+    ds = MSCTDDataSet('data/', 'val')
+    batch_size = 2
+    num_workers = 1
 
-print(ds[0])
+    train_loader = DataLoader(ds, batch_size=batch_size)
+    # train_loader = DataLoader(ds, batch_size=batch_size, num_workers=num_workers, pin_memory=True) # WHY THIS TAKES DAYS?
+    for x in train_loader:
+        print(x['images'].shape)
+        break
