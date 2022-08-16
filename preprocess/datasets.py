@@ -1,28 +1,24 @@
-import os
+import os, cv2, torch, ast
 import pandas as pd
 import numpy as np
-import cv2
-import torch
-import ast
-from torch.utils.data import Dataset, DataLoader
 from pathlib import Path
+from torch.utils.data import Dataset, DataLoader
 
 
 class MSCTDDataSet(Dataset):
     """MSCTD dataset."""
 
-    def __init__(self, base_path='data/', dataset_type='train', tokenizer=None):
+    def __init__(self, base_path="data/", dataset_type="train"):
         """
         Args:
             base_path (str): path to data folder
             dataset_type (str): dev, train, test
         """
-        self.tokenizer = tokenizer
         base_path = Path(base_path)
         self.text_path = base_path / f"english_{dataset_type}.txt"
         self.image_index_path = base_path / f"image_index_{dataset_type}.txt"
         self.sentiment_path = base_path / f"sentiment_{dataset_type}.txt"
-        self.image_dir = base_path / 'images' / dataset_type
+        self.image_dir = base_path / "images" / dataset_type
         self.data_info = self.read_info()
         self.image_pad = 10
 
@@ -35,7 +31,7 @@ class MSCTDDataSet(Dataset):
         with open(self.sentiment_path) as f:
             sentiments = [int(t.strip()) for t in f.readlines()]
         df = pd.DataFrame(
-            [texts, images, sentiments], index=["text", "images", "sentiment"]
+            [texts, images, sentiments], index=["text", "image", "sentiment"]
         ).transpose()
         return df
 
@@ -72,8 +68,6 @@ class MSCTDDataSet(Dataset):
         return sentiment
 
     def get_text_features(self, text):
-        if self.tokenizer:
-            return self.tokenizer.encode(text)
         return text
 
     def __getitem__(self, idx):
@@ -88,13 +82,48 @@ class MSCTDDataSet(Dataset):
 
         return sample
 
+
+class MSCTDDataLoader:
+    def __init__(self, dl, device, tokenizer=None, text_len=512):
+        self.dl = dl
+        self.device = device
+        self.tokenizer = tokenizer
+        self.text_len = text_len
+
+    def __iter__(self):
+        for b in self.dl:
+            if self.tokenizer:
+                b["text"] = self.tokenizer(
+                    b["text"],
+                    padding="max_length",
+                    max_length=self.text_len,  # including [CLS] end [SEP]
+                    truncation=True,
+                    return_tensors="pt",
+                    # return_offsets_mapping=True,
+                )
+            yield b
+            # yield to_device(b, self.device)
+
+    def __len__(self):
+        return len(self.dl)
+
+
 if __name__ == "__main__":
-    ds = MSCTDDataSet('data/', 'val')
     batch_size = 2
     num_workers = 1
 
-    train_loader = DataLoader(ds, batch_size=batch_size)
+    from transformers import AutoTokenizer
+
+    tokenizer = AutoTokenizer.from_pretrained("bert-base-cased")
+    # tokenizer = None
+    dataset = MSCTDDataSet("data/", "val")
+    dataloader = DataLoader(dataset, batch_size=batch_size)
+    dataloader = MSCTDDataLoader(dataloader, "cpu", tokenizer)
     # train_loader = DataLoader(ds, batch_size=batch_size, num_workers=num_workers, pin_memory=True) # WHY THIS TAKES DAYS?
-    for x in train_loader:
-        print(x['images'].shape)
+    for x in dataloader:
+        print(x["images"].shape)
+        if tokenizer:
+            print(x["text"]["input_ids"].shape)
+        else:
+            print(x["text"])
         break
