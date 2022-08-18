@@ -1,31 +1,32 @@
-import torch
-import numpy as np
-from gluoncv import model_zoo, data
-from gluoncv.data.transforms.pose import detector_to_simple_pose, heatmap_to_coord
+import torch, torchvision, cv2
+from torchvision.transforms import transforms as transforms
+from torchvision.models.detection import KeypointRCNN_ResNet50_FPN_Weights
+
 
 class PoseEmbeddingExtractor:
     def __init__(
         self,
+        device='cpu'
     ):
-        self.detector = model_zoo.get_model('yolo3_mobilenet1.0_coco', pretrained=True)
-        self.pose_net = model_zoo.get_model('simple_pose_resnet18_v1b', pretrained=True)
-        self.detector.reset_class(["person"], reuse_weights=['person'])
+        self.model = torchvision.models.detection.keypointrcnn_resnet50_fpn(weights=KeypointRCNN_ResNet50_FPN_Weights.DEFAULT,num_keypoints=17).to(device)
+        self.model.eval()
+        self.device = device
+        self.transform = transforms.Compose([
+            transforms.ToTensor()
+        ])
 
-    def detect_person(self, x, image):
-        class_IDs, scores, bounding_boxs = self.detector(x)
-        pose_input, upscale_bbox = detector_to_simple_pose(image, class_IDs, scores, bounding_boxs)
-        return pose_input, upscale_bbox
+    def extract_embedding(self, image):
+        image = self.transform(image)
+        image = image.unsqueeze(0).to(self.device)
+        with torch.no_grad():
+            outputs = self.model(image)
+        
+        keypoints_scores = outputs[0]['keypoints_scores']
+        best_score = torch.mean(keypoints_scores, axis=1).argmax().item()
+        keypoints = outputs[0]['keypoints'][best_score,:,:2]
+        return keypoints.ravel()
 
-    def get_most_confident_coords(self, predicted_heatmap, upscale_bbox):
-        pred_coords, confidence = heatmap_to_coord(predicted_heatmap, upscale_bbox)
-        mean_confidence = np.mean(confidence[:,:,0].asnumpy(), axis=1)
-        best_confidence_arg = mean_confidence.argmax()
-        best_coords = pred_coords[best_confidence_arg].asnumpy().ravel()
-        return best_coords
-
-    def extract_embedding(self, image_path):
-        x, image = data.transforms.presets.ssd.load_test(image_path, short=512)
-        pose_input, upscale_bbox = self.detect_person(x, image)
-        predicted_heatmap = self.pose_net(pose_input)
-        best_coords = self.get_most_confident_coords(predicted_heatmap, upscale_bbox)
-        return torch.tensor(best_coords)
+# p = PoseEmbeddingExtractor(device=device)
+# path = 'data/images/val/4965.jpg'
+# img = cv2.cvtColor(cv2.imread(path), cv2.COLOR_BGR2RGB)
+# p.extract_embedding(img).shape
