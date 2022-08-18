@@ -4,6 +4,7 @@ from torchvision import transforms
 from PIL import Image
 import urllib
 
+
 def get_model_path(model_name):
     model_file = model_name + ".pt"
     cache_dir = os.path.join(os.path.expanduser("~"), ".hsemotions")
@@ -21,8 +22,6 @@ def get_model_path(model_name):
         urllib.request.urlretrieve(url, fpath)
 
     return fpath
-
-
 
 
 class FaceEmotionRecognizer:
@@ -115,4 +114,3 @@ class FaceEmotionRecognizer:
         return [
             self.idx_to_class[pred.item()] for pred in (predictions_indices)
         ], scores
-

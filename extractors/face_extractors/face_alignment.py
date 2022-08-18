@@ -4,7 +4,6 @@ from scipy.spatial.distance import euclidean
 from skimage.transform import rotate
 
 
-
 class FaceAlignment:
     def __init__(
         self,
@@ -57,4 +56,3 @@ class FaceAlignment:
             directions.append(direction)
 
         return angles, directions
-

@@ -161,8 +161,6 @@ class MSCTDDataSet(Dataset):
             face_embeddings.append(record["face_embedding"])
             text_embeddings.append(record["text_embedding"])
             real_indexes.append(record["real_index"])
-            if i == 50:
-                break
         face_embeddings = torch.stack(face_embeddings, dim=0)
         print(face_embeddings.shape)
         torch.save(

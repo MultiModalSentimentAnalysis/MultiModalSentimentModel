@@ -3,6 +3,7 @@ import numpy as np
 import pandas as pd
 import cv2
 
+
 class FaceNormalizer:
     def __init__(self):
         self.mp_face_mesh = mediapipe.solutions.face_mesh
@@ -80,4 +81,3 @@ class FaceNormalizer:
             for input_image in input_images
         ]
         return normalized_faces_images
-

@@ -49,7 +49,7 @@ from image_analysis.representation_extraction import EmotionRepresentationExtrac
 #     except Exception as e:
 #         img_dirs = img.split("/")
 
-#         # logging 
+#         # logging
 #         non_face_files.write(f"image from set: {img_dirs[-2]} with id: {img_dirs[-1]} doesn't contain a face. moving to trash file")
 #         non_face_files.write(os.linesep)
 
@@ -58,6 +58,7 @@ from image_analysis.representation_extraction import EmotionRepresentationExtrac
 #         # print("new image dir: ", new_img_dir)
 #         # os.makedirs(new_img_dir, exist_ok=True)
 #         os.rename(img, new_img_dir)
+
 
 def remove_non_spaces(input_dir, output_dir):
     fd = FaceDetection("MTCNN", minimum_confidence=0.95)
@@ -94,8 +95,10 @@ def remove_non_spaces(input_dir, output_dir):
         except Exception as e:
             img_dirs = img.split("/")
 
-            # logging 
-            non_face_files.write(f"image from set: {img_dirs[-2]} with id: {img_dirs[-1]} doesn't contain a face. moving to trash file")
+            # logging
+            non_face_files.write(
+                f"image from set: {img_dirs[-2]} with id: {img_dirs[-1]} doesn't contain a face. moving to trash file"
+            )
             non_face_files.write(os.linesep)
 
             # moving data
@@ -103,6 +106,7 @@ def remove_non_spaces(input_dir, output_dir):
             # print("new image dir: ", new_img_dir)
             # os.makedirs(new_img_dir, exist_ok=True)
             os.rename(img, new_img_dir)
+
 
 if __name__ == "__main__":
     input_dir = "/home/sahel/personal/university/NLP/project/MultiModalEmotionRecognition/data/images/dev"
