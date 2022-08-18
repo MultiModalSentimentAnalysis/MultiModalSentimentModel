@@ -1,4 +1,4 @@
-from transformers import AutoTokenizer, AutoModel, pipeline
+from transformers import AutoTokenizer, pipeline
 from transformers import RobertaForSequenceClassification
 import torch
 import pickle
@@ -15,7 +15,7 @@ class TextEmbeddingExtractor:
     ):
         self.model_name = model_name
 
-        self.device = "cuda:0" if torch.cuda.is_available() else "cpu"
+        self.device = device
 
         self.batch_size = batch_size
         self.show_progress_bar = show_progress_bar
@@ -24,41 +24,40 @@ class TextEmbeddingExtractor:
         self.max_length = max_length
 
         self.tokenizer = AutoTokenizer.from_pretrained(self.model_name)
-        # self.model = RobertaForSequenceClassification.from_pretrained(self.model_name).to(self.device)
-        self.model = RobertaForSequenceClassification.from_pretrained(
-            self.model_name, num_labels=3
-        ).to(self.device)
         # self.model = AutoModel.from_pretrained(self.model_name).to(self.device)
 
+        self.model = RobertaForSequenceClassification.from_pretrained(
+            self.model_name, num_labels=3, output_hidden_states=True
+        ).to(self.device)
+
+        # C1
         self.generator = pipeline(
             task="sentiment-analysis",
             model=self.model,
             tokenizer=self.tokenizer,
         )
 
-    @staticmethod
-    def mean_pooling(model_output, attention_mask):
-        token_embeddings = model_output[
-            0
-        ]  # First element of model_output contains all token embeddings
-        input_mask_expanded = (
-            attention_mask.unsqueeze(-1).expand(token_embeddings.size()).float()
-        )
-        sum_embeddings = torch.sum(token_embeddings * input_mask_expanded, 1)
-        sum_mask = torch.clamp(input_mask_expanded.sum(1), min=1e-9)
-        return sum_embeddings / sum_mask
-
     def extract_embedding(
         self,
-        encoded_input,
+        input_batch_sentences,
     ):
+        encoded_input = self.tokenizer(
+            input_batch_sentences,
+            padding=True,
+            truncation=True,
+            max_length=self.max_length,
+            return_tensors="pt",
+        ).to(self.device)
+
         with torch.no_grad():
             model_output = self.model(**encoded_input)
+            hidden_states = model_output["hidden_states"]
+            last_layer_hidden_states = hidden_states[
+                12
+            ]  # 12 = len(hidden_states) , dim = (batch_size, seq_len, 768)
+            cls_hidden_state = last_layer_hidden_states[:, 0, :]
 
-        sentence_embeddings = self.mean_pooling(
-            model_output, encoded_input["attention_mask"]
-        )
-        return sentence_embeddings
+        return cls_hidden_state
 
     def get_labels(self, input_batch_sentences):
         return self.generator(input_batch_sentences)

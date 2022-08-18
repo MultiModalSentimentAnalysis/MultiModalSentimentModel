@@ -1,6 +1,5 @@
 from mtcnn import MTCNN
 
-
 class FaceDetection:
 
     # first call extract_face
@@ -66,3 +65,5 @@ class FaceDetection:
             for info in self.detected_faces_information
         ]
         return eyes_coordinates
+
+

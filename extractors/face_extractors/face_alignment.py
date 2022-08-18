@@ -1,8 +1,8 @@
-from deepface.commons import distance
 import numpy as np
-from scipy.spatial.distance import euclidean
 import math
+from scipy.spatial.distance import euclidean
 from skimage.transform import rotate
+
 
 
 class FaceAlignment:
@@ -57,3 +57,4 @@ class FaceAlignment:
             directions.append(direction)
 
         return angles, directions
+

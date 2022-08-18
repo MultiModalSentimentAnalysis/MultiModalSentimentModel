@@ -1,11 +1,8 @@
 import os
-import numpy as np
-from PIL import Image
 import torch
 from torchvision import transforms
-import timm
+from PIL import Image
 import urllib
-
 
 def get_model_path(model_name):
     model_file = model_name + ".pt"
@@ -26,12 +23,12 @@ def get_model_path(model_name):
     return fpath
 
 
+
+
 class FaceEmotionRecognizer:
     # supported values of model_name: enet_b0_8_best_vgaf, enet_b0_8_best_afew, enet_b2_8, enet_b0_8_va_mtl, enet_b2_7
-    def __init__(self, model_name="enet_b0_8_best_vgaf", device="cpu"):
-        self.device = (
-            "cuda:0" if torch.cuda.is_available() and device == "cuda:0" else "cpu"
-        )
+    def __init__(self, device, model_name="enet_b0_8_best_vgaf"):
+        self.device = device
         self.is_mtl = "_mtl" in model_name
         if "_7" in model_name:
             self.idx_to_class = {
@@ -118,3 +115,4 @@ class FaceEmotionRecognizer:
         return [
             self.idx_to_class[pred.item()] for pred in (predictions_indices)
         ], scores
+

@@ -1,12 +1,12 @@
-from image_analysis.face_detection import FaceDetection
-from image_analysis.face_alignment import FaceAlignment
-from image_analysis.face_normalization import FaceNormalizer
-from image_analysis.face_emotion_recognition import FaceEmotionRecognizer
+from extractors.face_extractors.face_detection import FaceDetection
+from extractors.face_extractors.face_alignment import FaceAlignment
+from extractors.face_extractors.face_normalizer import FaceNormalizer
+from extractors.face_extractors.face_emotion_recognizer import FaceEmotionRecognizer
 import numpy as np
 import pickle
 
 
-class EmotionRepresentationExtractor:
+class FaceEmbeddingExtractor:
     def __init__(
         self,
     ):
