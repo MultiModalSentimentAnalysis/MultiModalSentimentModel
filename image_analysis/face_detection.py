@@ -1,11 +1,4 @@
-import matplotlib.pyplot as plt
 from mtcnn import MTCNN
-from retinaface import RetinaFace
-
-from PIL import Image
-import math
-import numpy as np
-from deepface.commons import distance
 
 
 class FaceDetection:

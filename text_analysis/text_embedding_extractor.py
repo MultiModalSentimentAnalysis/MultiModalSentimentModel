@@ -1,4 +1,5 @@
 from transformers import AutoTokenizer, AutoModel, pipeline
+from transformers import RobertaForSequenceClassification
 import torch
 import pickle
 
@@ -23,12 +24,16 @@ class TextEmbeddingExtractor:
         self.max_length = max_length
 
         self.tokenizer = AutoTokenizer.from_pretrained(self.model_name)
-        self.model = AutoModel.from_pretrained(self.model_name).to(self.device)
+        # self.model = RobertaForSequenceClassification.from_pretrained(self.model_name).to(self.device)
+        self.model = RobertaForSequenceClassification.from_pretrained(
+            self.model_name, num_labels=3
+        ).to(self.device)
+        # self.model = AutoModel.from_pretrained(self.model_name).to(self.device)
 
         self.generator = pipeline(
             task="sentiment-analysis",
-            model=self.model_name,
-            tokenizer=self.model_name,
+            model=self.model,
+            tokenizer=self.tokenizer,
         )
 
     @staticmethod
@@ -45,17 +50,8 @@ class TextEmbeddingExtractor:
 
     def extract_embedding(
         self,
-        input_batch_sentences,
+        encoded_input,
     ):
-        # tokenized
-        encoded_input = self.tokenizer(
-            input_batch_sentences,
-            padding=True,
-            truncation=True,
-            max_length=self.max_length,
-            return_tensors="pt",
-        ).to(self.device)
-
         with torch.no_grad():
             model_output = self.model(**encoded_input)
 
