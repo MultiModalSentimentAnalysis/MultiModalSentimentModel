@@ -37,7 +37,7 @@ class FaceEmbeddingExtractor:
         self.face_emotion_recognition_model = face_emotion_recognition_model
         return self
 
-    def extract_representation(self, input_image):
+    def extract_embedding(self, input_image):
         faces, detected_faces_information = self.face_detection_model.extract_faces(
             input_image, return_detections_information=True
         )
