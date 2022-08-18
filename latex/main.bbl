@@ -1,0 +1,90 @@
+%%% -*-BibTeX-*-
+%%% Do NOT edit. File created by BibTeX with style
+%%% ACM-Reference-Format-Journals [18-Jan-2012].
+
+\begin{thebibliography}{4}
+
+%%% ====================================================================
+%%% NOTE TO THE USER: you can override these defaults by providing
+%%% customized versions of any of these macros before the \bibliography
+%%% command.  Each of them MUST provide its own final punctuation,
+%%% except for \shownote{}, \showDOI{}, and \showURL{}.  The latter two
+%%% do not use final punctuation, in order to avoid confusing it with
+%%% the Web address.
+%%%
+%%% To suppress output of a particular field, define its macro to expand
+%%% to an empty string, or better, \unskip, like this:
+%%%
+%%% \newcommand{\showDOI}[1]{\unskip}   % LaTeX syntax
+%%%
+%%% \def \showDOI #1{\unskip}           % plain TeX syntax
+%%%
+%%% ====================================================================
+
+\ifx \showCODEN    \undefined \def \showCODEN     #1{\unskip}     \fi
+\ifx \showDOI      \undefined \def \showDOI       #1{#1}\fi
+\ifx \showISBNx    \undefined \def \showISBNx     #1{\unskip}     \fi
+\ifx \showISBNxiii \undefined \def \showISBNxiii  #1{\unskip}     \fi
+\ifx \showISSN     \undefined \def \showISSN      #1{\unskip}     \fi
+\ifx \showLCCN     \undefined \def \showLCCN      #1{\unskip}     \fi
+\ifx \shownote     \undefined \def \shownote      #1{#1}          \fi
+\ifx \showarticletitle \undefined \def \showarticletitle #1{#1}   \fi
+\ifx \showURL      \undefined \def \showURL       {\relax}        \fi
+% The following commands are used for tagged output and should be
+% invisible to TeX
+\providecommand\bibfield[2]{#2}
+\providecommand\bibinfo[2]{#2}
+\providecommand\natexlab[1]{#1}
+\providecommand\showeprint[2][]{arXiv:#2}
+
+\bibitem[\protect\citeauthoryear{Paulmann and Pell}{Paulmann and Pell}{2011}]%
+        {paulmann2011there}
+\bibfield{author}{\bibinfo{person}{Silke Paulmann} {and}
+  \bibinfo{person}{Marc~D Pell}.} \bibinfo{year}{2011}\natexlab{}.
+\newblock \showarticletitle{Is there an advantage for recognizing multi-modal
+  emotional stimuli?}
+\newblock \bibinfo{journal}{\emph{Motivation and Emotion}}
+  \bibinfo{volume}{35}, \bibinfo{number}{2} (\bibinfo{year}{2011}),
+  \bibinfo{pages}{192--201}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Poria, Cambria, Hazarika, Majumder, Zadeh, and
+  Morency}{Poria et~al\mbox{.}}{2017}]%
+        {poria2017context}
+\bibfield{author}{\bibinfo{person}{Soujanya Poria}, \bibinfo{person}{Erik
+  Cambria}, \bibinfo{person}{Devamanyu Hazarika}, \bibinfo{person}{Navonil
+  Majumder}, \bibinfo{person}{Amir Zadeh}, {and}
+  \bibinfo{person}{Louis-Philippe Morency}.} \bibinfo{year}{2017}\natexlab{}.
+\newblock \showarticletitle{Context-dependent sentiment analysis in
+  user-generated videos}. In \bibinfo{booktitle}{\emph{Proceedings of the 55th
+  annual meeting of the association for computational linguistics (volume 1:
+  Long papers)}}. \bibinfo{pages}{873--883}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Shenoy and Sardana}{Shenoy and
+  Sardana}{2020}]%
+        {shenoy2020multilogue}
+\bibfield{author}{\bibinfo{person}{Aman Shenoy} {and} \bibinfo{person}{Ashish
+  Sardana}.} \bibinfo{year}{2020}\natexlab{}.
+\newblock \showarticletitle{Multilogue-net: A context aware rnn for multi-modal
+  emotion detection and sentiment analysis in conversation}.
+\newblock \bibinfo{journal}{\emph{arXiv preprint arXiv:2002.08267}}
+  (\bibinfo{year}{2020}).
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Yakaew, Dailey, and Racharak}{Yakaew
+  et~al\mbox{.}}{2021}]%
+        {yakaew2021multimodal}
+\bibfield{author}{\bibinfo{person}{Atitaya Yakaew}, \bibinfo{person}{Matthew~N
+  Dailey}, {and} \bibinfo{person}{Teeradaj Racharak}.}
+  \bibinfo{year}{2021}\natexlab{}.
+\newblock \showarticletitle{Multimodal Sentiment Analysis on Video Streams
+  using Lightweight Deep Neural Networks.}. In
+  \bibinfo{booktitle}{\emph{ICPRAM}}. \bibinfo{pages}{442--451}.
+\newblock
+
+
+\end{thebibliography}

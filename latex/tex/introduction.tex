@@ -1,0 +1,57 @@
+%
+%\noindent
+%The introduction is different from the abstract; it should elaborate
+%more on the context of the work and other aspects. Generally, you can repeat some
+%of the main points also in the introduction, but expand and use different words.
+%
+%To make your report easier to read, we recommend that you write in first person,
+%plural, i.e.~write \textit{we}, even if the report is single author.
+%This is also to represent that, even though you are writing this on your own,
+%your supervisor and possibly others are contributing ideas, suggestions and
+%corrections on your report.
+%
+%What follows is a possible structure of the introduction.
+%Note that the structure can be modified, but the content should be the same.
+%Introduction and Abstract should fill at most the first page.
+
+%\paragraph{Context and Motivation} The first few sentences in the introduction
+%is typically a brief description providing context for your work, explaining
+%the broader domain of the work. This context should lead into the motivation for
+%the work by identifying one or more problems.
+
+\paragraph{Context and Motivation} Analyzing and detecting emotions in images and text has been a growing trend in machine learning in recent years. A \textit{video} consists of a number of consecutive images and dialogues or monologues consisting of voice and text. In order to recognize emotions in a video, we can either analyze one of these aspects or combine the result of two or all aspect's analyses. We were curious about different algorithms for this task leading to various results; therefore we tested some of them in this project.
+
+%Here is an example from~\cite{zorfu}:
+
+%\textit{Traditional desktop applications, such as word processing, email, and photo management are increasingly moving to server-based deployments. However, moving applications to the cloud can reduce availability because Internet path availability averages only two-nines~\cite{internetPaths}. If a user's application state is isolated on a single server, the availability for that user is limited by the path availability between the user's desktop and that server. Hence, to improve availability, application state must be replicated across multiple servers placed in geographically distributed data centers.}
+
+\paragraph{Research Problem} We considered scripts and frames as the constituents of a video and ignored the sound and tone of expressing speeches, since analyzing those needed additional knowledge which was out of this course and project's scope. Hence, for the purpose of recognizing the emotions of a video we observed the effect of both video's scripts and its scenes. %TODO summery of models' description 
+
+%\paragraph{Research Problem} This paragraph further restricts the problem introduced in the motivation to the problem you are addressing. 
+%Make sure to explain to the reader 
+%what you are doing, why it is important, and why it is non-trivial.
+
+\paragraph{Related Work} At the beginning of this project, we decided to find and read related articles about this area. Here are their brief explanation:
+\begin{itemize}
+\item Indicated that emotion recognition is significantly better in response to multi-modal versus uni-modal stimuli.~\cite{paulmann2011there} However, this article's results were based on human trials and it did not include any machine learning methods.
+\item Propose a LSTM-based model that enables utterances to capture contextual information from their surroundings in the same video, thus aiding the classification process.~\cite{poria2017context}
+\item Proposed a context-level inter-modal attention framework for simultaneously predicting the sentiment and expressed emotions of an utterance, evaluated using CMU-MOSEI dataset.~\cite{shenoy2020multilogue}
+\item Proposed a deep neural learning approach based on multiple modalities in which extracted features of an audiovisual data stream are fused in real time for sentiment classification.~\cite{yakaew2021multimodal}
+%TODO: other articles
+\end{itemize}
+
+
+%\paragraph{Related Work} Next, you have to give a brief overview
+%of related work. For a paper like this, anywhere between 2
+%and 8 references. Briefly explain what they do. End the paragraph by
+%contrasting their work to what you do, to make it precisely clear what
+%your contribution is.
+%
+%\paragraph{Contribution Summary} 
+%It can be a good idea to end the introduction with a summary of your contributions as bullet points.
+%For example:
+%\begin{itemize}
+%\item We implement \paxos using brand new technologies.
+%\item We evaluate our implementation both in a WAN and LAN environment and show that it is $1.0001\times$ faster than state of the art.
+%\end{itemize}
+%It is not necessary to have a paragraph at the end of the introduction, that lists the following sections. 
