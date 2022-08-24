@@ -131,7 +131,7 @@ dmypy.json
 # data images
 data/images/*/*
 
-
+.vscode
 
 # Model weights
 *.pt
@@ -142,3 +142,4 @@ data/images/*/*
 *.synctex.gz
 # Development LaTeX PDF file
 LaTeX/Main.pdf 
+
