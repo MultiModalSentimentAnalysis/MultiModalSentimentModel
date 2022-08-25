@@ -37,6 +37,17 @@ class FaceEmbeddingExtractor:
         self.face_emotion_recognition_model = face_emotion_recognition_model
         return self
 
+    def merge_embedding(self, all_embedds: list, new_embed: list):
+        all_embedds.append(new_embed[0])
+        return all_embedds
+
+    def get_labels(self, image_list):
+        all_predictions = list()
+        for image in image_list:
+            predictions, scores, representations = self.extract_embedding(image)
+            all_predictions = self.merge_embedding(all_predictions, predictions)
+        return all_predictions
+
     def extract_embedding(self, input_image):
         faces, detected_faces_information = self.face_detection_model.extract_faces(
             input_image, return_detections_information=True
