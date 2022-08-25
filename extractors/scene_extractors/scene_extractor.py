@@ -4,7 +4,6 @@ from torch import nn
 
 
 class SceneRepresentationExtractor:
-
     def __init__(self, pretrained_model, weights):
         self.weights = weights
         self.preprocess = weights.transforms()
@@ -20,5 +19,3 @@ class SceneRepresentationExtractor:
     def extract_representation(self, image):
         transformed_image = self.preprocess(image).unsqueeze(0)
         return self.feature_extractor(transformed_image).ravel()
-
-

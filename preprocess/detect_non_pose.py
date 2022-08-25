@@ -10,7 +10,7 @@ from tqdm import tqdm
 
 
 def remove_non_poses(input_dir, split):
-    device = 'cuda' if torch.cuda.is_available() else 'cpu'
+    device = "cuda" if torch.cuda.is_available() else "cpu"
     pee = PoseEmbeddingExtractor(device=device)
     file_name = f"pose_error_{split}.txt"
     os.makedirs("./data/error_indexes", exist_ok=True)

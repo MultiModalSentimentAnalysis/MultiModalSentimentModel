@@ -7,10 +7,7 @@ import pickle
 
 
 class FaceEmbeddingExtractor:
-    def __init__(
-        self,
-        device='cuda'
-    ):
+    def __init__(self, device="cuda"):
         self.faces = None
         self.normalized_rotated_faces = None
         self.rotated_faces = None
@@ -26,7 +23,6 @@ class FaceEmbeddingExtractor:
         model_name = "enet_b0_8_best_afew"
         fer = FaceEmotionRecognizer(device, model_name)
         self.face_emotion_recognition_model: FaceEmotionRecognizer = fer
-
 
     def extract_embedding(self, input_image):
         faces, detected_faces_information = self.face_detection_model.extract_faces(
@@ -54,7 +50,9 @@ class FaceEmbeddingExtractor:
             self.face_emotion_recognition_model.extract_representations_from_faces(
                 normalized_rotated_faces_255
             )
-        )[0] #WARNING: 0 was not here
+        )[
+            0
+        ]  # WARNING: 0 was not here
         del normalized_rotated_faces_255
         del normalized_rotated_faces
         del rotated_faces

@@ -11,7 +11,7 @@ class TextEmbeddingExtractor:
         show_progress_bar=True,
         to_tensor=True,
         max_length=128,
-        device='cuda'
+        device="cuda",
     ):
         self.model_name = model_name
         self.device = device
@@ -25,7 +25,7 @@ class TextEmbeddingExtractor:
             task="sentiment-analysis",
             model=self.model,
             tokenizer=self.tokenizer,
-            device = 0
+            device=0,
         )
 
     def extract_embedding(
