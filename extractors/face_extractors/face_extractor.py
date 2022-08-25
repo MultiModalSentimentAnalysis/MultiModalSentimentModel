@@ -9,49 +9,30 @@ import pickle
 class FaceEmbeddingExtractor:
     def __init__(
         self,
+        device='cuda'
     ):
-        self.face_detection_model: FaceDetection = None
-        self.face_alignment_model: FaceAlignment = None
-        self.face_normalizer_model: FaceNormalizer = None
-        self.face_emotion_recognition_model: FaceEmotionRecognizer = None
-
         self.faces = None
         self.normalized_rotated_faces = None
         self.rotated_faces = None
         self.rotation_angles = None
         self.rotation_directions = None
 
-    def set_face_detection_model(self, face_detection_model):
-        self.face_detection_model = face_detection_model
-        return self
+        fd = FaceDetection("MTCNN", minimum_confidence=0.95)
+        self.face_detection_model: FaceDetection = fd
+        fa = FaceAlignment()
+        self.face_alignment_model: FaceAlignment = fa
+        fn = FaceNormalizer()
+        self.face_normalizer_model: FaceNormalizer = fn
+        model_name = "enet_b0_8_best_afew"
+        fer = FaceEmotionRecognizer(device, model_name)
+        self.face_emotion_recognition_model: FaceEmotionRecognizer = fer
 
-    def set_face_alignment_model(self, face_alignment_model):
-        self.face_alignment_model = face_alignment_model
-        return self
-
-    def set_face_normalizer_model(self, face_normalizer_model):
-        self.face_normalizer_model = face_normalizer_model
-        return self
-
-    def set_face_emotion_recognition_model(self, face_emotion_recognition_model):
-        self.face_emotion_recognition_model = face_emotion_recognition_model
-        return self
-
-    def merge_embedding(self, all_embedds: list, new_embed: list):
-        all_embedds.append(new_embed[0])
-        return all_embedds
-
-    def get_labels(self, image_list):
-        all_predictions = list()
-        for image in image_list:
-            predictions, scores, representations = self.extract_embedding(image)
-            all_predictions = self.merge_embedding(all_predictions, predictions)
-        return all_predictions
 
     def extract_embedding(self, input_image):
         faces, detected_faces_information = self.face_detection_model.extract_faces(
             input_image, return_detections_information=True
         )
+
         (
             rotation_angles,
             rotation_directions,
@@ -73,23 +54,31 @@ class FaceEmbeddingExtractor:
             self.face_emotion_recognition_model.extract_representations_from_faces(
                 normalized_rotated_faces_255
             )
-        )
-        (
-            predictions,
-            scores,
-        ) = self.face_emotion_recognition_model.predict_emotions_from_representations(
-            representations
-        )
+        )[0] #WARNING: 0 was not here
+        del normalized_rotated_faces_255
+        del normalized_rotated_faces
+        del rotated_faces
+        del rotation_angles
+        del rotation_directions
+        del faces
+        del detected_faces_information
+        # (
+        #     predictions,
+        #     scores,
+        # ) = self.face_emotion_recognition_model.predict_emotions_from_representations(
+        #     representations
+        # )
 
-        self.faces = faces
-        self.rotation_angles, self.rotation_directions = (
-            rotation_angles,
-            rotation_directions,
-        )
-        self.rotated_faces = rotated_faces
-        self.normalized_rotated_faces = normalized_rotated_faces_255
+        # self.faces = faces
+        # self.rotation_angles, self.rotation_directions = (
+        #     rotation_angles,
+        #     rotation_directions,
+        # )
+        # self.rotated_faces = rotated_faces
+        # self.normalized_rotated_faces = normalized_rotated_faces_255
 
-        return predictions, scores, representations
+        return None, None, representations
+        # return preictions, scores, representations
 
     def get_rotations_information(self):
         return self.rotation_angles, self.rotation_directions

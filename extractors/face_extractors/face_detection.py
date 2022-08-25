@@ -1,19 +1,17 @@
-from mtcnn import MTCNN
-
+from facenet_pytorch import MTCNN as MTCNN2
 
 class FaceDetection:
 
     # first call extract_face
-    def __init__(self, model_name, minimum_confidence):
+    def __init__(self, model_name, minimum_confidence, device = 'cuda'):
 
         self.detected_faces_information = None
         self.model_name = model_name
         self.minimum_confidence = minimum_confidence
-
         if model_name == "MTCNN":
-            detector_model = MTCNN()
+            detector_model = MTCNN2(device=device)
             self.detect_faces_function = (
-                lambda input_image: detector_model.detect_faces(input_image)
+                lambda input_image: detector_model.detect(input_image, landmarks=True)
             )
 
     def extract_faces(self, input_image, return_detections_information=True):
@@ -29,12 +27,27 @@ class FaceDetection:
 
     def detect_faces__(self, input_image):
         detections = self.detect_faces_function(input_image)
+        detections = [
+            {
+                'box': detections[0][i],
+                'confidence': detections[1][i],
+                'keypoints': {
+                    'left_eye': detections[2][i][0],
+                    'right_eye': detections[2][i][1],
+                    'nose': detections[2][i][2],
+                    'mouth_left': detections[2][i][3], 
+                    'mouth_right': detections[2][i][4]
+                }
+              
+            }
+            for i in range(detections[0].shape[0])]
         self.detected_faces_information = list(
             filter(
                 lambda element: element["confidence"] > self.minimum_confidence,
                 detections,
             )
         )
+
 
     def get_detected_faces_information(self):
         return self.detected_faces_information
@@ -54,7 +67,7 @@ class FaceDetection:
             detection_information["box"]
             for detection_information in self.detected_faces_information
         ]
-        y1y2x1x2 = [(int(y), int(y + h), int(x), int(x + w)) for x, y, w, h in boxes]
+        y1y2x1x2 = [(int(y), int(y2), int(x), int(x2)) for x, y, x2, y2 in boxes]
         faces = [input_image[y1:y2, x1:x2] for y1, y2, x1, x2 in y1y2x1x2]
         return faces
 
@@ -66,3 +79,4 @@ class FaceDetection:
             for info in self.detected_faces_information
         ]
         return eyes_coordinates
+

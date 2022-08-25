@@ -81,3 +81,4 @@ class FaceNormalizer:
             for input_image in input_images
         ]
         return normalized_faces_images
+
