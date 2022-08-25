@@ -143,3 +143,9 @@ data/images/*/*
 # Development LaTeX PDF file
 LaTeX/Main.pdf 
 
+
+# Data files
+dev.zip
+train.zip
+test.zip
+
