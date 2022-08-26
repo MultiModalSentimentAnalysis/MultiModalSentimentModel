@@ -1,8 +1,14 @@
 import torch
 import re
+import sys, os
+from pathlib import Path
+
+project_path = Path(os.path.dirname(os.path.dirname(os.getcwd())))
+sys.path.append(str(project_path))
 
 from transformers import AutoTokenizer, pipeline, AutoModelForSequenceClassification
 from typing import List
+from settings import DEVICE
 
 
 class GermanTextEmbeddingExtractor:
@@ -10,54 +16,67 @@ class GermanTextEmbeddingExtractor:
         self,
         model_name="oliverguhr/german-sentiment-bert",
         max_length=128,
-        device='cuda'
     ):
         self.model_name = model_name
-        self.device = device
         self.max_length = max_length
         self.tokenizer = AutoTokenizer.from_pretrained(self.model_name)
         self.model = AutoModelForSequenceClassification.from_pretrained(
             self.model_name, output_hidden_states=True
-        ).to(self.device)
+        ).to(DEVICE)
 
         self.generator = pipeline(
             task="sentiment-analysis",
             model=self.model,
             tokenizer=self.tokenizer,
-            device = 0
+            device=0,
         )
-        self.clean_chars = re.compile(r'[^A-Za-züöäÖÜÄß ]', re.MULTILINE)
-        self.clean_http_urls = re.compile(r'https*\S+', re.MULTILINE)
-        self.clean_at_mentions = re.compile(r'@\S+', re.MULTILINE)
+        self.clean_chars = re.compile(r"[^A-Za-züöäÖÜÄß ]", re.MULTILINE)
+        self.clean_http_urls = re.compile(r"https*\S+", re.MULTILINE)
+        self.clean_at_mentions = re.compile(r"@\S+", re.MULTILINE)
 
-    def predict_sentiment(self, texts: List[str])-> List[str]:
+    def predict_sentiment(self, texts: List[str]) -> List[str]:
         texts = [self.clean_text(text) for text in texts]
         # Add special tokens takes care of adding [CLS], [SEP], <s>... tokens in the right way for each model.
         # truncation=True limits number of tokens to model's limitations (512)
-        encoded = self.tokenizer.batch_encode_plus(texts,padding=True, add_special_tokens=True,truncation=True, return_tensors="pt")
-        encoded = encoded.to(self.device)
+        encoded = self.tokenizer.batch_encode_plus(
+            texts,
+            padding=True,
+            add_special_tokens=True,
+            truncation=True,
+            return_tensors="pt",
+        )
+        encoded = encoded.to(DEVICE)
         with torch.no_grad():
-                logits = self.model(**encoded)
-        
+            logits = self.model(**encoded)
+
         label_ids = torch.argmax(logits[0], axis=1)
         return [self.model.config.id2label[label_id.item()] for label_id in label_ids]
 
+    def replace_numbers(self, text: str) -> str:
+        return (
+            text.replace("0", " null")
+            .replace("1", " eins")
+            .replace("2", " zwei")
+            .replace("3", " drei")
+            .replace("4", " vier")
+            .replace("5", " fünf")
+            .replace("6", " sechs")
+            .replace("7", " sieben")
+            .replace("8", " acht")
+            .replace("9", " neun")
+        )
 
-    def replace_numbers(self,text: str) -> str:
-            return text.replace("0"," null").replace("1"," eins").replace("2"," zwei")\
-                .replace("3"," drei").replace("4"," vier").replace("5"," fünf") \
-                .replace("6"," sechs").replace("7"," sieben").replace("8"," acht") \
-                .replace("9"," neun")         
-
-    def clean_text(self,text: str)-> str:    
-            text = text.replace("\n", " ")        
-            text = self.clean_http_urls.sub('',text)
-            text = self.clean_at_mentions.sub('',text)        
-            text = self.replace_numbers(text)                
-            text = self.clean_chars.sub('', text) # use only text chars                          
-            text = ' '.join(text.split()) # substitute multiple whitespace with single whitespace   
-            text = text.strip().lower()
-            return text
+    def clean_text(self, text: str) -> str:
+        text = text.replace("\n", " ")
+        text = self.clean_http_urls.sub("", text)
+        text = self.clean_at_mentions.sub("", text)
+        text = self.replace_numbers(text)
+        text = self.clean_chars.sub("", text)  # use only text chars
+        text = " ".join(
+            text.split()
+        )  # substitute multiple whitespace with single whitespace
+        text = text.strip().lower()
+        return text
 
     def extract_embedding(
         self,
@@ -69,7 +88,7 @@ class GermanTextEmbeddingExtractor:
             truncation=True,
             max_length=self.max_length,
             return_tensors="pt",
-        ).to(self.device)
+        ).to(DEVICE)
 
         with torch.no_grad():
             model_output = self.model(**encoded_input)

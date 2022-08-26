@@ -1,7 +1,7 @@
 import os, torch
 from pathlib import Path
 
-BASE_DIR = Path("/content/drive/MyDrive/NLP/MultiModalEmotionRecognition")
+BASE_DIR = Path(".")
 DATA_DIR = BASE_DIR / "data"
 SAVE_DIR = DATA_DIR / "saved_features"
 TEXTS_DIR = DATA_DIR / "texts"
