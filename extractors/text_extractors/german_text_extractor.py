@@ -26,7 +26,7 @@ class GermanTextEmbeddingExtractor:
             task="sentiment-analysis",
             model=self.model,
             tokenizer=self.tokenizer,
-            device=0,
+            device=DEVICE,
         )
         self.clean_chars = re.compile(r"[^A-Za-züöäÖÜÄß ]", re.MULTILINE)
         self.clean_http_urls = re.compile(r"https*\S+", re.MULTILINE)

@@ -11,8 +11,6 @@ class EnglishTextEmbeddingExtractor:
     def __init__(
         self,
         model_name="pysentimiento/robertuito-sentiment-analysis",
-        show_progress_bar=True,
-        to_tensor=True,
         max_length=128,
     ):
         self.model_name = model_name
