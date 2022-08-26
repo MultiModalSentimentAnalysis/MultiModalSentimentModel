@@ -17,8 +17,8 @@ from settings import *
 app = FastAPI()
 
 
-# @serve.deployment()
-# @serve.ingress(app)
+@serve.deployment()
+@serve.ingress(app)
 class SentimentAnalyser:
     def __init__(self, model_path="/home/sahel/personal/university/NLP/project/MultiModalEmotionRecognition/models/eng_model.pt", language="English"):
         self.base_model = torch.load(model_path)
@@ -73,8 +73,8 @@ class SentimentAnalyser:
             "face_embedding": [face_embedding],
         }
 
-    # @app.post("/single/")
-    async def get_sentiment(self, text: str, img: UploadFile):
+    @app.post("/get_sentiment/")
+    async def get_sentiment(self, text: str, image: UploadFile):
         contents = await img.read()
         nparr = np.fromstring(contents, np.uint8)
         img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)

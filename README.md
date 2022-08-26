@@ -66,7 +66,7 @@ Project is organized as follow:
 
 **deployment** 
 
-code is used for deploying project on ray server.
+code is used for deploying project on Ray Serve. Instructions on how to use it is in deployment/README.md
 
 **extractors**
 
