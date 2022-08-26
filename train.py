@@ -1,4 +1,5 @@
-import torch, tqdm
+import torch
+from tqdm import tqdm
 from torch import nn, optim
 from models import SimpleDenseNetwork
 from preprocess.datasets import get_dataset_and_dataloder

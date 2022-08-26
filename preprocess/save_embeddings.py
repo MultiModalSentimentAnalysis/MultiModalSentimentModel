@@ -1,4 +1,5 @@
-import torch, tqdm
+import torch
+from tqdm import tqdm
 from torch.utils.data import DataLoader
 from preprocess.datasets import MSCTDDataSet
 from settings import SAVE_DIR
@@ -51,7 +52,7 @@ def save_features(dataloader, split):
         )
 
         assert (
-            batch["pose_embedding"].shape[0] == batch["text_embedding"].shape[0]
+            batch["pose_embedding"].shape[0] == batch["eng_text_embedding"].shape[0]
         ), "text and pose list are not the same size in saving"
         assert (
             batch["face_embedding"].shape[0] == batch["pose_embedding"].shape[0]

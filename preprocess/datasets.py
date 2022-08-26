@@ -5,6 +5,7 @@ from settings import (
     DEVICE,
     FACE_EMBEDDING_SIZE,
     POSE_EMBEDDING_SIZE,
+    SCENE_EMBEDDING_SIZE,
     TEXTS_DIR,
     LABELS_DIR,
     IMAGES_DIR,
@@ -209,6 +210,7 @@ class MSCTDDataSet(Dataset):
             print(e)
             face_embedding = torch.ones(FACE_EMBEDDING_SIZE).to(DEVICE) * -123
             pose_embedding = torch.ones(POSE_EMBEDDING_SIZE).to(DEVICE) * -123
+            scene_embedding = torch.ones(SCENE_EMBEDDING_SIZE).to(DEVICE) * -123
 
         sentiment = self.get_sentiment(index)
         eng_text_embedding = self.get_eng_text(index)
