@@ -10,7 +10,7 @@ from ray import serve
 # local imports
 from extractors.face_extractors.face_extractor import FaceEmbeddingExtractor
 from extractors.pose_extractors.pose_extractor import PoseEmbeddingExtractor
-from extractors.text_extractors.english_text_extractor import TextEmbeddingExtractor
+from extractors.text_extractors.english_text_extractor import EnglishTextEmbeddingExtractor
 
 
 app = FastAPI()
@@ -21,14 +21,7 @@ POSE_EMBEDDING_SIZE = 34
 DEVICE = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
 
-@serve.deployment(
-    _autoscaling_config={
-        "min_replicas": 1,
-        "max_replicas": 5,
-        "target_num_ongoing_requests_per_replica": 5,
-    },
-    version="v1",
-)
+@serve.deployment()
 @serve.ingress(app)
 class SentimentAnalyser:
     def __init__(self, model_path="./models/eng_model.pt", language="English"):
@@ -43,7 +36,7 @@ class SentimentAnalyser:
 
     def load_text_embedder(self):
         if self.language == "eng":
-            return TextEmbeddingExtractor()
+            return EnglishTextEmbeddingExtractor()
 
     def load_pose_embedder(self):
         return PoseEmbeddingExtractor()
