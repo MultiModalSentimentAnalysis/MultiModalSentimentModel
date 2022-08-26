@@ -5,6 +5,10 @@ from skimage.transform import rotate
 
 
 class FaceAlignment:
+    """
+    Aligns the face such that faces are simillar before passing to next steps
+    """
+
     def __init__(
         self,
     ):

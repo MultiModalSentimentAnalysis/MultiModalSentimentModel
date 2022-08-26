@@ -1,13 +1,18 @@
+import numpy as np
+import pickle
 from extractors.face_extractors.face_detection import FaceDetection
 from extractors.face_extractors.face_alignment import FaceAlignment
 from extractors.face_extractors.face_normalizer import FaceNormalizer
 from extractors.face_extractors.face_emotion_recognizer import FaceEmotionRecognizer
-import numpy as np
-import pickle
 
 
 class FaceEmbeddingExtractor:
-    def __init__(self, device="cuda"):
+    """
+    Extracts embedding of an image, based on detected faces and their emotions. It consists of all necessary steps for
+    extracting embedding from an image.
+    """
+
+    def __init__(self):
         self.faces = None
         self.normalized_rotated_faces = None
         self.rotated_faces = None
@@ -21,7 +26,7 @@ class FaceEmbeddingExtractor:
         fn = FaceNormalizer()
         self.face_normalizer_model: FaceNormalizer = fn
         model_name = "enet_b0_8_best_afew"
-        fer = FaceEmotionRecognizer(device, model_name)
+        fer = FaceEmotionRecognizer(model_name)
         self.face_emotion_recognition_model: FaceEmotionRecognizer = fer
 
     def extract_embedding(self, input_image):

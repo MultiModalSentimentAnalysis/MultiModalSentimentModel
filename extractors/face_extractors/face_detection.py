@@ -1,16 +1,19 @@
-from facenet_pytorch import MTCNN as MTCNN2
+from facenet_pytorch import MTCNN
+from settings import DEVICE
 
 
 class FaceDetection:
+    """
+    Detects faces in the image using MTCNN netork.
+    """
 
-    # first call extract_face
-    def __init__(self, model_name, minimum_confidence, device="cuda"):
+    def __init__(self, model_name, minimum_confidence):
 
         self.detected_faces_information = None
         self.model_name = model_name
         self.minimum_confidence = minimum_confidence
         if model_name == "MTCNN":
-            detector_model = MTCNN2(device=device)
+            detector_model = MTCNN(device=DEVICE)
             self.detect_faces_function = lambda input_image: detector_model.detect(
                 input_image, landmarks=True
             )

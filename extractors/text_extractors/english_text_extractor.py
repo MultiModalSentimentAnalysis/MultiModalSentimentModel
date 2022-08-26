@@ -1,31 +1,31 @@
-from transformers import AutoTokenizer, AutoModel, pipeline
-from transformers import RobertaForSequenceClassification
 import torch
-import pickle
+from settings import DEVICE
+from transformers import pipeline, RobertaForSequenceClassification, AutoTokenizer
 
 
-class TextEmbeddingExtractor:
+class EnglishTextEmbeddingExtractor:
+    """
+    Extracts embedding of the text using [CLS] token of a Roberta based model.
+    """
+
     def __init__(
         self,
         model_name="pysentimiento/robertuito-sentiment-analysis",
         show_progress_bar=True,
         to_tensor=True,
         max_length=128,
-        device="cuda",
     ):
         self.model_name = model_name
-        self.device = device
         self.max_length = max_length
         self.tokenizer = AutoTokenizer.from_pretrained(self.model_name)
         self.model = RobertaForSequenceClassification.from_pretrained(
             self.model_name, num_labels=3, output_hidden_states=True
-        ).to(self.device)
+        ).to(DEVICE)
 
         self.generator = pipeline(
             task="sentiment-analysis",
             model=self.model,
             tokenizer=self.tokenizer,
-            device=0,
         )
 
     def extract_embedding(
@@ -38,7 +38,7 @@ class TextEmbeddingExtractor:
             truncation=True,
             max_length=self.max_length,
             return_tensors="pt",
-        ).to(self.device)
+        ).to(DEVICE)
 
         with torch.no_grad():
             model_output = self.model(**encoded_input)

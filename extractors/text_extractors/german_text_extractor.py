@@ -1,17 +1,15 @@
 import torch
 import re
-import sys, os
-from pathlib import Path
-
-project_path = Path(os.path.dirname(os.path.dirname(os.getcwd())))
-sys.path.append(str(project_path))
-
 from transformers import AutoTokenizer, pipeline, AutoModelForSequenceClassification
 from typing import List
 from settings import DEVICE
 
 
 class GermanTextEmbeddingExtractor:
+    """
+    Extracts embedding of the text using [CLS] token of a Bert based model.
+    """
+
     def __init__(
         self,
         model_name="oliverguhr/german-sentiment-bert",

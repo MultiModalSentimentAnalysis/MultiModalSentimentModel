@@ -1,9 +1,15 @@
-import torch, torchvision, cv2
+import torch, torchvision
 from torchvision.transforms import transforms as transforms
 from torchvision.models.detection import KeypointRCNN_ResNet50_FPN_Weights
+from settings import DEVICE
 
 
 class PoseEmbeddingExtractor:
+    """
+    Extracts embedding based on pose of the persons in the image. Each person is consisted of 17 keypoints
+    and they are used as a feature.
+    """
+
     def __init__(self):
         self.model = torchvision.models.detection.keypointrcnn_resnet50_fpn(
             weights=KeypointRCNN_ResNet50_FPN_Weights.DEFAULT, num_keypoints=17

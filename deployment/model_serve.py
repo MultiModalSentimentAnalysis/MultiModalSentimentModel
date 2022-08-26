@@ -1,6 +1,6 @@
 import torch
 import cv2
-import numpy as np 
+import numpy as np
 
 # deployment imports/
 from fastapi import FastAPI, UploadFile
@@ -13,7 +13,6 @@ from extractors.pose_extractors.pose_extractor import PoseEmbeddingExtractor
 from extractors.text_extractors.english_text_extractor import TextEmbeddingExtractor
 
 
-
 app = FastAPI()
 FACE_EMBEDDING_SIZE = 1280
 ENG_TEXT_EMBEDDING_SIZE = 768
@@ -21,17 +20,18 @@ GER_TEXT_EMBEDDING_SIZE = 768
 POSE_EMBEDDING_SIZE = 34
 DEVICE = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
+
 @serve.deployment(
     _autoscaling_config={
         "min_replicas": 1,
         "max_replicas": 5,
         "target_num_ongoing_requests_per_replica": 5,
     },
-    version="v1"
+    version="v1",
 )
 @serve.ingress(app)
 class SentimentAnalyser:
-    def __init__(self, model_path='./models/eng_model.pt', language="English"):
+    def __init__(self, model_path="./models/eng_model.pt", language="English"):
         self.base_model = torch.load(model_path)
         self.language = language
         self.face_embbedder = self.load_face_embedder()
@@ -77,22 +77,30 @@ class SentimentAnalyser:
             face_embedding = torch.ones(FACE_EMBEDDING_SIZE).to(DEVICE) * -123
             pose_embedding = torch.ones(POSE_EMBEDDING_SIZE).to(DEVICE) * -123
         text_embedding = self.get_text_embedding(txt)
-        return {"text_embedding": [text_embedding],
-                "pose_embedding": [pose_embedding],
-                "face_embedding": [face_embedding]}
+        return {
+            "text_embedding": [text_embedding],
+            "pose_embedding": [pose_embedding],
+            "face_embedding": [face_embedding],
+        }
 
-    @app.post('/single/')
+    @app.post("/single/")
     async def get_sentiment(self, text: str, img: UploadFile):
         contents = await img.read()
         nparr = np.fromstring(contents, np.uint8)
         img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
         processed_data = self.preprocess_data(text, img)
-        inputs = torch.cat((processed_data["face_embedding"],
-                            processed_data["text_embedding"],
-                            processed_data["pose_embedding"]), 1)
+        inputs = torch.cat(
+            (
+                processed_data["face_embedding"],
+                processed_data["text_embedding"],
+                processed_data["pose_embedding"],
+            ),
+            1,
+        )
         logits = self.base_model(inputs)
         outputs = logits.argmax(dim=1)
         return {"output": outputs}
+
 
 def register_task():
     ray.init(address="auto", namespace="serve")

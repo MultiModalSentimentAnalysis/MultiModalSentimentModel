@@ -1,8 +1,9 @@
 import os
 import torch
+import urllib
 from torchvision import transforms
 from PIL import Image
-import urllib
+from settings import DEVICE
 
 
 def get_model_path(model_name):
@@ -25,9 +26,11 @@ def get_model_path(model_name):
 
 
 class FaceEmotionRecognizer:
-    # supported values of model_name: enet_b0_8_best_vgaf, enet_b0_8_best_afew, enet_b2_8, enet_b0_8_va_mtl, enet_b2_7
-    def __init__(self, device, model_name="enet_b0_8_best_vgaf"):
-        self.device = device
+    """
+    Finds emotion of a face image input.
+    """
+
+    def __init__(self, model_name="enet_b0_8_best_vgaf"):
         self.is_mtl = "_mtl" in model_name
         if "_7" in model_name:
             self.idx_to_class = {
@@ -65,7 +68,7 @@ class FaceEmotionRecognizer:
         path = get_model_path(model_name)
 
         model = torch.load(path)
-        model = model.to(device)
+        model = model.to(DEVICE)
 
         if isinstance(model.classifier, torch.nn.Sequential):
             self.classifier_weights = model.classifier[0].weight.data
@@ -83,7 +86,7 @@ class FaceEmotionRecognizer:
 
     def extract_representations_from_faces(self, input_faces):
         faces = [self.test_transforms(Image.fromarray(face)) for face in input_faces]
-        features = self.model(torch.stack(faces, dim=0).to(self.device))
+        features = self.model(torch.stack(faces, dim=0).to(DEVICE))
         return features
 
     def predict_emotions_from_representations(

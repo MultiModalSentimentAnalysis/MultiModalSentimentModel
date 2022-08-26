@@ -1,10 +1,14 @@
 import mediapipe
+import cv2
 import numpy as np
 import pandas as pd
-import cv2
 
 
 class FaceNormalizer:
+    """
+    Normalizes images for network consistency.
+    """
+
     def __init__(self):
         self.mp_face_mesh = mediapipe.solutions.face_mesh
         face_mesh = self.mp_face_mesh.FaceMesh(static_image_mode=True)
