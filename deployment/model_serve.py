@@ -11,25 +11,22 @@ from ray import serve
 from extractors.face_extractors.face_extractor import FaceEmbeddingExtractor
 from extractors.pose_extractors.pose_extractor import PoseEmbeddingExtractor
 from extractors.text_extractors.english_text_extractor import EnglishTextEmbeddingExtractor
+from settings import *
 
 
 app = FastAPI()
-FACE_EMBEDDING_SIZE = 1280
-ENG_TEXT_EMBEDDING_SIZE = 768
-GER_TEXT_EMBEDDING_SIZE = 768
-POSE_EMBEDDING_SIZE = 34
-DEVICE = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
 
-@serve.deployment()
-@serve.ingress(app)
+# @serve.deployment()
+# @serve.ingress(app)
 class SentimentAnalyser:
-    def __init__(self, model_path="./models/eng_model.pt", language="English"):
+    def __init__(self, model_path="/home/sahel/personal/university/NLP/project/MultiModalEmotionRecognition/models/eng_model.pt", language="English"):
         self.base_model = torch.load(model_path)
         self.language = language
         self.face_embbedder = self.load_face_embedder()
         self.text_embedder = self.load_text_embedder()
         self.pose_embedder = self.load_pose_embedder()
+        print("model is load!!")
 
     def load_face_embedder(self):
         return FaceEmbeddingExtractor()
@@ -76,7 +73,7 @@ class SentimentAnalyser:
             "face_embedding": [face_embedding],
         }
 
-    @app.post("/single/")
+    # @app.post("/single/")
     async def get_sentiment(self, text: str, img: UploadFile):
         contents = await img.read()
         nparr = np.fromstring(contents, np.uint8)

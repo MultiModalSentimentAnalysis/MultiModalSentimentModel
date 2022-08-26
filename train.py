@@ -1,9 +1,9 @@
 import torch, tqdm
 from torch import nn, optim
-from MultiModalEmotionRecognition.models import SimpleDenseNetwork
-from MultiModalEmotionRecognition.preprocess.datasets import get_dataset_and_dataloder
-from MultiModalEmotionRecognition.settings import DEVICE, FULL_EMBEDDING_SIZE, SAVE_DIR
-from MultiModalEmotionRecognition.val import validate
+from models import SimpleDenseNetwork
+from preprocess.datasets import get_dataset_and_dataloder
+from settings import DEVICE, FULL_EMBEDDING_SIZE, SAVE_DIR
+from val import validate
 
 LEARNING_RATE = 0.00001
 BATCH_SIZE = 32
