@@ -1,0 +1,80 @@
+%%%% 
+% This is a template for project reports in the subject DAT620 at the
+% Department of Electrical Engineering and Computer Science,
+% University of Stavanger.
+% 
+% The template is based on the ACM conference template 
+% it was edited by Leander Jehl and Hein Meling
+\documentclass[sigconf]{acmart}
+
+\input{dat620-setup}
+
+%In the preamble file you can include packages and define macros.
+\input{preamble}
+
+\begin{document}
+
+%\begin{titlepage}
+%	\begin{center}
+%
+%	\end{center}
+%\end{titlepage}
+
+\title{Multi-Modal Methods for Sentiment Recognition}
+%you may use a subtitle
+\subtitle{Natural Language Processing Course Project Report}
+\author{D. Dehghani, A. Kashiri, S. Mesforoush, S.A. Mousavizadeh, F. Tohidian, S. Tabesh}
+\affiliation{Sharif University of Technology}
+\email{Spring 1401}
+
+\supervisors{Ehsaneddin Asgari}
+
+\begin{abstract}
+%The abstract lies in a different file: 
+\input{tex/abstract}
+\end{abstract}
+
+\keywords{Multimodal Sentiment Analysis, Transfer learning, Neural Network, Sentiment Recognition}
+
+\maketitle
+
+
+%Each section can be placed in a separate file and included by the input command.
+
+\section{Introduction}
+\label{sec:introduction}
+\input{tex/introduction}
+
+\section{Related work}
+\label{sec:literature}
+\input{tex/literature}
+
+\section{Datasets}
+\label{sec:datasets} 
+\input{tex/datasets}
+
+\section{Methodology}
+\label{sec:method}
+\input{tex/method}
+%
+\section{Experimental Evaluation}
+\label{sec:evaluation}
+\input{tex/evaluation}
+%
+\section{Conclusion}
+\label {sec:conclusion}
+\input{tex/conclusion.tex}
+%
+%\section{Citation}
+%\label{sec:citation}
+%\input{tex/citations}
+
+\section{Further Work}
+\label{sec:further}
+\input{tex/further}
+
+\bibliographystyle{ACM-Reference-Format}
+%\bibliographystyle{unsrt}
+\bibliography{sample-bibliography}
+
+\end{document}

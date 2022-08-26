@@ -1,0 +1,293 @@
+%%% -*-BibTeX-*-
+%%% Do NOT edit. File created by BibTeX with style
+%%% ACM-Reference-Format-Journals [18-Jan-2012].
+
+\begin{thebibliography}{19}
+
+%%% ====================================================================
+%%% NOTE TO THE USER: you can override these defaults by providing
+%%% customized versions of any of these macros before the \bibliography
+%%% command.  Each of them MUST provide its own final punctuation,
+%%% except for \shownote{}, \showDOI{}, and \showURL{}.  The latter two
+%%% do not use final punctuation, in order to avoid confusing it with
+%%% the Web address.
+%%%
+%%% To suppress output of a particular field, define its macro to expand
+%%% to an empty string, or better, \unskip, like this:
+%%%
+%%% \newcommand{\showDOI}[1]{\unskip}   % LaTeX syntax
+%%%
+%%% \def \showDOI #1{\unskip}           % plain TeX syntax
+%%%
+%%% ====================================================================
+
+\ifx \showCODEN    \undefined \def \showCODEN     #1{\unskip}     \fi
+\ifx \showDOI      \undefined \def \showDOI       #1{#1}\fi
+\ifx \showISBNx    \undefined \def \showISBNx     #1{\unskip}     \fi
+\ifx \showISBNxiii \undefined \def \showISBNxiii  #1{\unskip}     \fi
+\ifx \showISSN     \undefined \def \showISSN      #1{\unskip}     \fi
+\ifx \showLCCN     \undefined \def \showLCCN      #1{\unskip}     \fi
+\ifx \shownote     \undefined \def \shownote      #1{#1}          \fi
+\ifx \showarticletitle \undefined \def \showarticletitle #1{#1}   \fi
+\ifx \showURL      \undefined \def \showURL       {\relax}        \fi
+% The following commands are used for tagged output and should be
+% invisible to TeX
+\providecommand\bibfield[2]{#2}
+\providecommand\bibinfo[2]{#2}
+\providecommand\natexlab[1]{#1}
+\providecommand\showeprint[2][]{arXiv:#2}
+
+\bibitem[\protect\citeauthoryear{Ahuja, Lee, Ishii, and Morency}{Ahuja
+  et~al\mbox{.}}{2020}]%
+        {ahuja2020no}
+\bibfield{author}{\bibinfo{person}{Chaitanya Ahuja}, \bibinfo{person}{Dong~Won
+  Lee}, \bibinfo{person}{Ryo Ishii}, {and} \bibinfo{person}{Louis-Philippe
+  Morency}.} \bibinfo{year}{2020}\natexlab{}.
+\newblock \showarticletitle{No Gestures Left Behind: Learning Relationships
+  between Spoken Language and Freeform Gestures}. In
+  \bibinfo{booktitle}{\emph{Proceedings of the 2020 Conference on Empirical
+  Methods in Natural Language Processing: Findings}}.
+  \bibinfo{pages}{1884--1895}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Ahuja, Lee, Nakano, and Morency}{Ahuja
+  et~al\mbox{.}}{[n. d.]}]%
+        {ahuja2020style}
+\bibfield{author}{\bibinfo{person}{Chaitanya Ahuja}, \bibinfo{person}{Dong~Won
+  Lee}, \bibinfo{person}{Yukiko~I. Nakano}, {and}
+  \bibinfo{person}{Louis-Philippe Morency}.} \bibinfo{year}{[n.
+  d.]}\natexlab{}.
+\newblock \showarticletitle{Style Transfer for Co-Speech Gesture Animation: A
+  Multi-Speaker Conditional-Mixture Approach}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Akhtar, Chauhan, Ghosal, Poria, Ekbal, and
+  Bhattacharyya}{Akhtar et~al\mbox{.}}{2019}]%
+        {akhtar2019multi}
+\bibfield{author}{\bibinfo{person}{Md~Shad Akhtar},
+  \bibinfo{person}{Dushyant~Singh Chauhan}, \bibinfo{person}{Deepanway Ghosal},
+  \bibinfo{person}{Soujanya Poria}, \bibinfo{person}{Asif Ekbal}, {and}
+  \bibinfo{person}{Pushpak Bhattacharyya}.} \bibinfo{year}{2019}\natexlab{}.
+\newblock \showarticletitle{Multi-task learning for multi-modal emotion
+  recognition and sentiment analysis}.
+\newblock \bibinfo{journal}{\emph{arXiv preprint arXiv:1905.05812}}
+  (\bibinfo{year}{2019}).
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Busso, Bulut, Lee, Kazemzadeh, Mower, Kim,
+  Chang, Lee, and Narayanan}{Busso et~al\mbox{.}}{2008}]%
+        {busso2008iemocap}
+\bibfield{author}{\bibinfo{person}{Carlos Busso}, \bibinfo{person}{Murtaza
+  Bulut}, \bibinfo{person}{Chi-Chun Lee}, \bibinfo{person}{Abe Kazemzadeh},
+  \bibinfo{person}{Emily Mower}, \bibinfo{person}{Samuel Kim},
+  \bibinfo{person}{Jeannette~N Chang}, \bibinfo{person}{Sungbok Lee}, {and}
+  \bibinfo{person}{Shrikanth~S Narayanan}.} \bibinfo{year}{2008}\natexlab{}.
+\newblock \showarticletitle{IEMOCAP: Interactive emotional dyadic motion
+  capture database}.
+\newblock \bibinfo{journal}{\emph{Language resources and evaluation}}
+  \bibinfo{volume}{42}, \bibinfo{number}{4} (\bibinfo{year}{2008}),
+  \bibinfo{pages}{335--359}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Ginosar, Bar, Kohavi, Chan, Owens, and
+  Malik}{Ginosar et~al\mbox{.}}{2019}]%
+        {ginosar2019learning}
+\bibfield{author}{\bibinfo{person}{Shiry Ginosar}, \bibinfo{person}{Amir Bar},
+  \bibinfo{person}{Gefen Kohavi}, \bibinfo{person}{Caroline Chan},
+  \bibinfo{person}{Andrew Owens}, {and} \bibinfo{person}{Jitendra Malik}.}
+  \bibinfo{year}{2019}\natexlab{}.
+\newblock \showarticletitle{Learning individual styles of conversational
+  gesture}. In \bibinfo{booktitle}{\emph{Proceedings of the IEEE Conference on
+  Computer Vision and Pattern Recognition}}. \bibinfo{pages}{3497--3506}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Kazemi and Sullivan}{Kazemi and
+  Sullivan}{2014}]%
+        {kazemi2014one}
+\bibfield{author}{\bibinfo{person}{Vahid Kazemi} {and}
+  \bibinfo{person}{Josephine Sullivan}.} \bibinfo{year}{2014}\natexlab{}.
+\newblock \showarticletitle{One millisecond face alignment with an ensemble of
+  regression trees}. In \bibinfo{booktitle}{\emph{Proceedings of the IEEE
+  conference on computer vision and pattern recognition}}.
+  \bibinfo{pages}{1867--1874}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Liang, Meng, Xu, Chen, and Zhou}{Liang
+  et~al\mbox{.}}{2022}]%
+        {liang2022msctd}
+\bibfield{author}{\bibinfo{person}{Yunlong Liang}, \bibinfo{person}{Fandong
+  Meng}, \bibinfo{person}{Jinan Xu}, \bibinfo{person}{Yufeng Chen}, {and}
+  \bibinfo{person}{Jie Zhou}.} \bibinfo{year}{2022}\natexlab{}.
+\newblock \showarticletitle{Msctd: A multimodal sentiment chat translation
+  dataset}.
+\newblock \bibinfo{journal}{\emph{arXiv preprint arXiv:2202.13645}}
+  (\bibinfo{year}{2022}).
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Liu, Ott, Goyal, Du, Joshi, Chen, Levy, Lewis,
+  Zettlemoyer, and Stoyanov}{Liu et~al\mbox{.}}{2019}]%
+        {liu2019roberta}
+\bibfield{author}{\bibinfo{person}{Yinhan Liu}, \bibinfo{person}{Myle Ott},
+  \bibinfo{person}{Naman Goyal}, \bibinfo{person}{Jingfei Du},
+  \bibinfo{person}{Mandar Joshi}, \bibinfo{person}{Danqi Chen},
+  \bibinfo{person}{Omer Levy}, \bibinfo{person}{Mike Lewis},
+  \bibinfo{person}{Luke Zettlemoyer}, {and} \bibinfo{person}{Veselin
+  Stoyanov}.} \bibinfo{year}{2019}\natexlab{}.
+\newblock \showarticletitle{Roberta: A robustly optimized bert pretraining
+  approach}.
+\newblock \bibinfo{journal}{\emph{arXiv preprint arXiv:1907.11692}}
+  (\bibinfo{year}{2019}).
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Meng, Wang, Han, Sun, Wu, Yan, and Li}{Meng
+  et~al\mbox{.}}{2020}]%
+        {meng2020openvidial}
+\bibfield{author}{\bibinfo{person}{Yuxian Meng}, \bibinfo{person}{Shuhe Wang},
+  \bibinfo{person}{Qinghong Han}, \bibinfo{person}{Xiaofei Sun},
+  \bibinfo{person}{Fei Wu}, \bibinfo{person}{Rui Yan}, {and}
+  \bibinfo{person}{Jiwei Li}.} \bibinfo{year}{2020}\natexlab{}.
+\newblock \showarticletitle{Openvidial: A large-scale, open-domain dialogue
+  dataset with visual contexts}.
+\newblock \bibinfo{journal}{\emph{arXiv preprint arXiv:2012.15015}}
+  (\bibinfo{year}{2020}).
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Nojavanasghari, Baltru{\v{s}}aitis, Hughes,
+  and Morency}{Nojavanasghari et~al\mbox{.}}{2016}]%
+        {nojavanasghari2016emoreact}
+\bibfield{author}{\bibinfo{person}{Behnaz Nojavanasghari},
+  \bibinfo{person}{Tadas Baltru{\v{s}}aitis}, \bibinfo{person}{Charles~E
+  Hughes}, {and} \bibinfo{person}{Louis-Philippe Morency}.}
+  \bibinfo{year}{2016}\natexlab{}.
+\newblock \showarticletitle{Emoreact: a multimodal approach and dataset for
+  recognizing emotional responses in children}. In
+  \bibinfo{booktitle}{\emph{Proceedings of the 18th acm international
+  conference on multimodal interaction}}. \bibinfo{pages}{137--144}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Paulmann and Pell}{Paulmann and Pell}{2011}]%
+        {paulmann2011there}
+\bibfield{author}{\bibinfo{person}{Silke Paulmann} {and}
+  \bibinfo{person}{Marc~D Pell}.} \bibinfo{year}{2011}\natexlab{}.
+\newblock \showarticletitle{Is there an advantage for recognizing multi-modal
+  emotional stimuli?}
+\newblock \bibinfo{journal}{\emph{Motivation and Emotion}}
+  \bibinfo{volume}{35}, \bibinfo{number}{2} (\bibinfo{year}{2011}),
+  \bibinfo{pages}{192--201}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Poria, Cambria, Hazarika, Majumder, Zadeh, and
+  Morency}{Poria et~al\mbox{.}}{2017}]%
+        {poria2017context}
+\bibfield{author}{\bibinfo{person}{Soujanya Poria}, \bibinfo{person}{Erik
+  Cambria}, \bibinfo{person}{Devamanyu Hazarika}, \bibinfo{person}{Navonil
+  Majumder}, \bibinfo{person}{Amir Zadeh}, {and}
+  \bibinfo{person}{Louis-Philippe Morency}.} \bibinfo{year}{2017}\natexlab{}.
+\newblock \showarticletitle{Context-dependent sentiment analysis in
+  user-generated videos}. In \bibinfo{booktitle}{\emph{Proceedings of the 55th
+  annual meeting of the association for computational linguistics (volume 1:
+  Long papers)}}. \bibinfo{pages}{873--883}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Savchenko, Savchenko, and Makarov}{Savchenko
+  et~al\mbox{.}}{2022}]%
+        {savchenko2022classifying}
+\bibfield{author}{\bibinfo{person}{Andrey~V Savchenko},
+  \bibinfo{person}{Lyudmila~V Savchenko}, {and} \bibinfo{person}{Ilya
+  Makarov}.} \bibinfo{year}{2022}\natexlab{}.
+\newblock \showarticletitle{Classifying emotions and engagement in online
+  learning based on a single facial expression recognition neural network}.
+\newblock \bibinfo{journal}{\emph{IEEE Transactions on Affective Computing}}
+  (\bibinfo{year}{2022}).
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Shenoy and Sardana}{Shenoy and
+  Sardana}{2020}]%
+        {shenoy2020multilogue}
+\bibfield{author}{\bibinfo{person}{Aman Shenoy} {and} \bibinfo{person}{Ashish
+  Sardana}.} \bibinfo{year}{2020}\natexlab{}.
+\newblock \showarticletitle{Multilogue-net: A context aware rnn for multi-modal
+  emotion detection and sentiment analysis in conversation}.
+\newblock \bibinfo{journal}{\emph{arXiv preprint arXiv:2002.08267}}
+  (\bibinfo{year}{2020}).
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Xiao, Wu, and Wei}{Xiao et~al\mbox{.}}{2018}]%
+        {xiao2018simple}
+\bibfield{author}{\bibinfo{person}{Bin Xiao}, \bibinfo{person}{Haiping Wu},
+  {and} \bibinfo{person}{Yichen Wei}.} \bibinfo{year}{2018}\natexlab{}.
+\newblock \showarticletitle{Simple baselines for human pose estimation and
+  tracking}. In \bibinfo{booktitle}{\emph{Proceedings of the European
+  conference on computer vision (ECCV)}}. \bibinfo{pages}{466--481}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Yakaew, Dailey, and Racharak}{Yakaew
+  et~al\mbox{.}}{2021}]%
+        {yakaew2021multimodal}
+\bibfield{author}{\bibinfo{person}{Atitaya Yakaew}, \bibinfo{person}{Matthew~N
+  Dailey}, {and} \bibinfo{person}{Teeradaj Racharak}.}
+  \bibinfo{year}{2021}\natexlab{}.
+\newblock \showarticletitle{Multimodal Sentiment Analysis on Video Streams
+  using Lightweight Deep Neural Networks.}. In
+  \bibinfo{booktitle}{\emph{ICPRAM}}. \bibinfo{pages}{442--451}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Zadeh, Zellers, Pincus, and Morency}{Zadeh
+  et~al\mbox{.}}{2016}]%
+        {zadeh2016mosi}
+\bibfield{author}{\bibinfo{person}{Amir Zadeh}, \bibinfo{person}{Rowan
+  Zellers}, \bibinfo{person}{Eli Pincus}, {and} \bibinfo{person}{Louis-Philippe
+  Morency}.} \bibinfo{year}{2016}\natexlab{}.
+\newblock \showarticletitle{Mosi: multimodal corpus of sentiment intensity and
+  subjectivity analysis in online opinion videos}.
+\newblock \bibinfo{journal}{\emph{arXiv preprint arXiv:1606.06259}}
+  (\bibinfo{year}{2016}).
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Zadeh, Liang, Poria, Cambria, and
+  Morency}{Zadeh et~al\mbox{.}}{2018}]%
+        {zadeh2018multimodal}
+\bibfield{author}{\bibinfo{person}{AmirAli~Bagher Zadeh},
+  \bibinfo{person}{Paul~Pu Liang}, \bibinfo{person}{Soujanya Poria},
+  \bibinfo{person}{Erik Cambria}, {and} \bibinfo{person}{Louis-Philippe
+  Morency}.} \bibinfo{year}{2018}\natexlab{}.
+\newblock \showarticletitle{Multimodal language analysis in the wild: Cmu-mosei
+  dataset and interpretable dynamic fusion graph}. In
+  \bibinfo{booktitle}{\emph{Proceedings of the 56th Annual Meeting of the
+  Association for Computational Linguistics (Volume 1: Long Papers)}}.
+  \bibinfo{pages}{2236--2246}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Zhang, Zhang, Li, and Qiao}{Zhang
+  et~al\mbox{.}}{2016}]%
+        {zhang2016joint}
+\bibfield{author}{\bibinfo{person}{Kaipeng Zhang}, \bibinfo{person}{Zhanpeng
+  Zhang}, \bibinfo{person}{Zhifeng Li}, {and} \bibinfo{person}{Yu Qiao}.}
+  \bibinfo{year}{2016}\natexlab{}.
+\newblock \showarticletitle{Joint face detection and alignment using multitask
+  cascaded convolutional networks}.
+\newblock \bibinfo{journal}{\emph{IEEE signal processing letters}}
+  \bibinfo{volume}{23}, \bibinfo{number}{10} (\bibinfo{year}{2016}),
+  \bibinfo{pages}{1499--1503}.
+\newblock
+
+
+\end{thebibliography}

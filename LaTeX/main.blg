@@ -1,0 +1,96 @@
+This is BibTeX, Version 0.99d
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: main.aux
+Reallocating 'name_of_file' (item size: 1) to 21 items.
+The style file: ACM-Reference-Format.bst
+Reallocating 'name_of_file' (item size: 1) to 20 items.
+Reallocating 'singl_function' (item size: 4) to 100 items.
+Reallocating 'wiz_functions' (item size: 4) to 6000 items.
+Database file #1: sample-bibliography.bib
+I was expecting a `,' or a `}'---line 124 of file sample-bibliography.bib
+ :  
+ :  year={2020},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Reallocating 'singl_function' (item size: 4) to 100 items.
+Reallocating 'glb_str_end' (item size: 4) to 20 items.
+Reallocating 'glb_str_ptr' (item size: 4) to 20 items.
+Reallocating 'global_strs' (item size: 1) to 4000000 items.
+Reallocating 'singl_function' (item size: 4) to 100 items.
+Warning--empty publisher in ahuja2020no
+Warning--empty address in ahuja2020no
+Warning--empty year in ahuja2020style
+Warning--empty booktitle in ahuja2020style
+Warning--empty publisher in ahuja2020style
+Warning--empty address in ahuja2020style
+Warning--page numbers missing in both pages and numpages fields in ahuja2020style
+Warning--no number and no volume in akhtar2019multi
+Warning--page numbers missing in both pages and numpages fields in akhtar2019multi
+Warning--empty publisher in ginosar2019learning
+Warning--empty address in ginosar2019learning
+Warning--empty publisher in kazemi2014one
+Warning--empty address in kazemi2014one
+Warning--no number and no volume in liang2022msctd
+Warning--page numbers missing in both pages and numpages fields in liang2022msctd
+Warning--no number and no volume in liu2019roberta
+Warning--page numbers missing in both pages and numpages fields in liu2019roberta
+Warning--no number and no volume in meng2020openvidial
+Warning--page numbers missing in both pages and numpages fields in meng2020openvidial
+Warning--empty publisher in nojavanasghari2016emoreact
+Warning--empty address in nojavanasghari2016emoreact
+Warning--empty publisher in poria2017context
+Warning--empty address in poria2017context
+Warning--no number and no volume in savchenko2022classifying
+Warning--page numbers missing in both pages and numpages fields in savchenko2022classifying
+Warning--no number and no volume in shenoy2020multilogue
+Warning--page numbers missing in both pages and numpages fields in shenoy2020multilogue
+Warning--empty publisher in xiao2018simple
+Warning--empty address in xiao2018simple
+Warning--empty publisher in yakaew2021multimodal
+Warning--empty address in yakaew2021multimodal
+Warning--no number and no volume in zadeh2016mosi
+Warning--page numbers missing in both pages and numpages fields in zadeh2016mosi
+Warning--empty publisher in zadeh2018multimodal
+Warning--empty address in zadeh2018multimodal
+You've used 19 entries,
+            5732 wiz_defined-function locations,
+            1393 strings with 19004 characters,
+and the built_in function-call counts, 25031 in all, are:
+= -- 3084
+> -- 1155
+< -- 0
++ -- 387
+- -- 380
+* -- 1923
+:= -- 2610
+add.period$ -- 94
+call.type$ -- 19
+change.case$ -- 165
+chr.to.int$ -- 19
+cite$ -- 54
+duplicate$ -- 2055
+empty$ -- 1446
+format.name$ -- 456
+if$ -- 6077
+int.to.chr$ -- 2
+int.to.str$ -- 1
+missing$ -- 85
+newline$ -- 183
+num.names$ -- 152
+pop$ -- 899
+preamble$ -- 1
+purify$ -- 330
+quote$ -- 0
+skip$ -- 691
+stack$ -- 0
+substring$ -- 1633
+swap$ -- 200
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 430
+warning$ -- 35
+while$ -- 121
+width$ -- 0
+write$ -- 344
+(There was 1 error message)
