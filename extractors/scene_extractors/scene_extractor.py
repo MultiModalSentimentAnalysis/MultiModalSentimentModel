@@ -1,21 +1,20 @@
 from torchvision.models import resnet50, ResNet50_Weights
-from torchvision.io import read_image
 from torch import nn
+class SceneEmbeddingExtractor:
 
+    def __init__(self, device = 'cpu'):
+        self.weights = ResNet50_Weights.DEFAULT
+        self.pretrained_model = resnet50(weights=self.weights)
+        self.pretrained_model.eval().to(device)
+        self.preprocess = self.weights.transforms()
+        self.feature_extractor = self.remove_last_layer()
 
-class SceneRepresentationExtractor:
-    def __init__(self, pretrained_model, weights):
-        self.weights = weights
-        self.preprocess = weights.transforms()
-        self.feature_extractor = self.remove_last_layer(pretrained_model)
-
-    @staticmethod
-    def remove_last_layer(pretrained_model):
-        modules = list(pretrained_model.children())[:-1]
+    def remove_last_layer(self):
+        modules = list(self.pretrained_model.children())[:-1]
         model = nn.Sequential(*modules)
         model.eval()
         return model
 
-    def extract_representation(self, image):
+    def extract_embedding(self, image):
         transformed_image = self.preprocess(image).unsqueeze(0)
         return self.feature_extractor(transformed_image).ravel()
