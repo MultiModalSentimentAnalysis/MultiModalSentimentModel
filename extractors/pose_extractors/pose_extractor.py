@@ -4,17 +4,16 @@ from torchvision.models.detection import KeypointRCNN_ResNet50_FPN_Weights
 
 
 class PoseEmbeddingExtractor:
-    def __init__(self, device="cpu"):
+    def __init__(self):
         self.model = torchvision.models.detection.keypointrcnn_resnet50_fpn(
             weights=KeypointRCNN_ResNet50_FPN_Weights.DEFAULT, num_keypoints=17
-        ).to(device)
+        ).to(DEVICE)
         self.model.eval()
-        self.device = device
         self.transform = transforms.Compose([transforms.ToTensor()])
 
     def extract_embedding(self, image):
         image = self.transform(image)
-        image = image.unsqueeze(0).to(self.device)
+        image = image.unsqueeze(0).to(DEVICE)
         with torch.no_grad():
             outputs = self.model(image)
 

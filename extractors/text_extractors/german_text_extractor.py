@@ -1,13 +1,8 @@
-from transformers import AutoTokenizer, AutoModel, pipeline
-from transformers import RobertaForSequenceClassification
-import torch
-import pickle
-
-
-from transformers import AutoModelForSequenceClassification, AutoTokenizer
-from typing import List
 import torch
 import re
+
+from transformers import AutoTokenizer, pipeline, AutoModelForSequenceClassification
+from typing import List
 
 
 class GermanTextEmbeddingExtractor:
