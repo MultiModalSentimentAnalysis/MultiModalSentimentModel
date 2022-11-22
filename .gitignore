@@ -129,7 +129,7 @@ dmypy.json
 
 
 # data images
-data/images/*/*
+data/MSCTD/images/*/*
 
 .vscode
 
