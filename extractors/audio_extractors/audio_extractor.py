@@ -4,7 +4,7 @@ from pydub import AudioSegment
 import numpy as np
 
 
-class AudioEmbeddingExtractors:
+class AudioEmbeddingExtractor:
     """
     Extracts embedding based on scene recognition task
     """
