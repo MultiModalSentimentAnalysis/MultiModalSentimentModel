@@ -39,7 +39,7 @@ class FaceNormalizer:
         return routes_idx
 
     def get_landmarks__(self, input_image: np.ndarray):
-        if input_image.dtype == np.float:
+        if input_image.dtype == float:
             input_image = (input_image * 255).astype(np.uint8)
 
         results = self.face_mesh.process(input_image)
